@@ -39,15 +39,17 @@ public class StockAnalysis_v2 {
             System.out.print(stockPrices[i] + " | ");
             i++;
         }
-        System.out.println();
+        System.out.println("--------------------------------");
 
         // Displaying the average stock price
         float average = calculateAvgStockPrice(stockPrices);
         System.out.println("Average Stock Price: " + average);
+        System.out.println("--------------------------------");
 
         // Displaying the maximum stock price
         float maximum = findMaxStockPrice(stockPrices);
         System.out.println("Maximum Stock Price: " + maximum);
+        System.out.println("--------------------------------");
 
         // Pick a random value from the generated stock prices to use as the target
         // price for counting occurrences
@@ -56,13 +58,13 @@ public class StockAnalysis_v2 {
         // Counting occurrences of a specific price
         int occurrences = countPriceOccurrences(targetPrice, stockPrices);
         System.out.println("Occurrences of " + targetPrice + ": " + occurrences);
-
+        System.out.println("--------------------------------");
         // Converting the array of stock prices to an ArrayList
         ArrayList<Float> stockPricesList = convertArrayToArrayList(stockPrices);
 
         // Displaying the cumulative sum of stock prices
-        ArrayList<Float> cumulativeSum = calculateCumulativeSum(stockPricesList);
-        System.out.println("Cumulative Sums: " + cumulativeSum);
+        ArrayList<Float> cumulativeSumList = calculateTheCumulativeSum(stockPricesList);
+        System.out.println("Cumulative Sums: " + cumulativeSumList);
     }
 
     /**
@@ -143,12 +145,17 @@ public class StockAnalysis_v2 {
      * @return The count of the specific price.
      */
     public static int countPriceOccurrences(float lookingForValue, float[] stockArray) {
+        // Create and initialize a local variable to store the count
         int count = 0;
+        // Iterate through the given array of stock prices using a traditional for loop
         for (int i = 0; i < stockArray.length; i++) {
+            // Check if the current stock price is equal to the specific price
             if (stockArray[i] == lookingForValue) {
+                // If so, increment the count
                 count++;
             }
         }
+        // Return the count
         return count;
     }
 
@@ -159,7 +166,7 @@ public class StockAnalysis_v2 {
      * @param stockList The ArrayList of stock prices.
      * @return An ArrayList representing the cumulative sum.
      */
-    public static ArrayList<Float> calculateCumulativeSum(ArrayList<Float> stockList) {
+    public static ArrayList<Float> calculateTheCumulativeSum(ArrayList<Float> stockList) {
         // Create and initialize a local variable to store the running total
         ArrayList<Float> resultList = new ArrayList<>();
 
