@@ -1,0 +1,8 @@
+{
+  "Blade Runner": ["Sci-Fi", "Neo-noir"],
+  "The Matrix": ["Sci-Fi", "Action"],
+  "Star Wars: Return of the Jedi": ["Sci-Fi", "Adventure"],
+  "Terminator 2: Judgment Day": ["Sci-Fi", "Action"],
+  "Total Recall": ["Sci-Fi", "Action"],
+  "The Fifth Element": ["Sci-Fi", "Adventure"]
+}

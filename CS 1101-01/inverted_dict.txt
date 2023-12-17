@@ -1,0 +1,22 @@
+{
+  "Sci-Fi": [
+    "Blade Runner",
+    "The Matrix",
+    "Star Wars: Return of the Jedi",
+    "Terminator 2: Judgment Day",
+    "Total Recall",
+    "The Fifth Element"
+  ],
+  "Neo-noir": [
+    "Blade Runner"
+  ],
+  "Action": [
+    "The Matrix",
+    "Terminator 2: Judgment Day",
+    "Total Recall"
+  ],
+  "Adventure": [
+    "Star Wars: Return of the Jedi",
+    "The Fifth Element"
+  ]
+}
