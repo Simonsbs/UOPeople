@@ -160,12 +160,22 @@ public class StockAnalysis_v2 {
      * @return An ArrayList representing the cumulative sum.
      */
     public static ArrayList<Float> calculateCumulativeSum(ArrayList<Float> stockList) {
+        // Create and initialize a local variable to store the running total
         ArrayList<Float> resultList = new ArrayList<>();
+
+        // create a variable to store the running sum
         float runningSum = 0;
+
+        // Iterate through the given ArrayList of stock prices using a for..each style
+        // loop
         for (float stock : stockList) {
+            // Add the current stock price to the running total
             runningSum += stock;
+            // Add the current running total to resultList
             resultList.add(runningSum);
         }
+
+        // Return the ArrayList representing the cumulative sum
         return resultList;
     }
 }
