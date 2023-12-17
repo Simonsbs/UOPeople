@@ -1,0 +1,368 @@
+<div class="post-message pr-md-5" id="post-content-29439401">
+  <p dir="ltr" style="text-align: left"></p>
+  <p></p>
+  <p dir="ltr"></p>
+  <p dir="ltr">
+    For this discussion, we are going to take a deep dive into the two main
+    building blocks of development. loops and conditions. With these, we can
+    fully control the flow of our code, make decisions, and repeat code. in the
+    following, we are going to look at each of the controls and see where and
+    when we would use each.
+  </p>
+
+  <p dir="ltr"><b>Loops</b></p>
+
+  <ol start="1" type="1">
+    <li dir="ltr">
+      <b>While loop:</b>
+      <ol start="1" type="1">
+        <li dir="ltr">
+          Executes the block of code if the given condition is true. The
+          condition is evaluated each time before the execution of the loop’s
+          body.
+        </li>
+        <li dir="ltr">
+          <b>Practical Implications:</b>&nbsp;best suited for situations where
+          the number of iterations is unknown beforehand.
+        </li>
+        <li dir="ltr">
+          <b>Applications:</b>
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Reading a file until the end is reached or waiting for user input.
+            </li>
+            <li dir="ltr">
+              Repeatedly prompt the user for input until a valid response is
+              received.
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Pros:</b>
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Simplicity in cases where the number of iterations is uncertain.
+            </li>
+            <li dir="ltr">
+              Easy to understand and implement, especially for beginners.
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Cons:</b>
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Risk of infinite loops if the condition is not properly managed.
+            </li>
+            <li dir="ltr">
+              Can be less efficient than for loops for counting or iterating
+              over a known range.
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <p dir="ltr">
+    2.&nbsp;&nbsp;&nbsp;&nbsp; <span dir="ltr"></span><b>Do-While loop:</b>
+  </p>
+
+  <p dir="ltr">
+    1.&nbsp;&nbsp;&nbsp;&nbsp; <span dir="ltr"></span>Like the while loop,
+    except that the condition is evaluated after the execution of the loop’s
+    body. Meaning that the body of the loop will be executed at least once, no
+    matter the condition’s value.
+  </p>
+
+  <p dir="ltr">
+    2.&nbsp;&nbsp;&nbsp;&nbsp; <span dir="ltr"></span
+    ><b>Practical Implications:</b>&nbsp;Guarantees that the loop body is
+    executed at least once. So, if we have some code in the body of the loop
+    that we know we are going to need at least once this is the loop to choose.
+  </p>
+
+  <ol start="1" type="1">
+    <li>
+      <ol start="3" type="1">
+        <li dir="ltr">
+          <b>Applications</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Implementing a menu that should display at least once before
+              evaluating a condition (e.g., exit prompt)<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              Processing user input at least once and then checking conditions
+              for further iterations<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              ><span dir="ltr"></span><span dir="ltr"></span
+              ><span dir="ltr"></span><span dir="ltr"></span>&nbsp;And if the
+              input doesn't suit the requirements loop until it does.
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Pros</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Guaranteed Execution ensures that the loop body is executed at
+              least once, which is handy in some scenarios<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              More readable and straightforward in scenarios where at least one
+              iteration is required<span dir="rtl"></span><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Cons</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Limited Use Cases are less commonly used than while or for loops
+              due to their post-condition nature<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              Redundancy can lead to executing the loop body unnecessarily if
+              the initial condition is not met<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li dir="ltr">
+      <b>For loop:</b>
+      <ol start="1" type="1">
+        <li dir="ltr">
+          The initialization, condition checking, and iteration are all on one
+          line. And it loops a set number of times.
+        </li>
+        <li dir="ltr">
+          <b>Practical Implications:&nbsp;</b>Preferable for counting loops
+          where the number of iterations is known.
+        </li>
+        <li dir="ltr">
+          <b>Applications</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Running a loop, a specific number of times, such as processing
+              items in an array or list<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              Implementing loops where the number of iterations is known and
+              controlled by a counter<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Pros</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Integrates initialization, condition, and increment/decrement in a
+              single line, enhancing readability<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              Offers precise control over the loop’s execution, making it ideal
+              for fixed-iteration tasks<span dir="rtl"></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+          </ol>
+        </li>
+
+        <li dir="ltr">
+          <b>Cons</b><span dir="rtl"></span><span dir="rtl"></span
+          ><b
+            ><span lang="he" dir="rtl" xml:lang="he"
+              ><span dir="rtl"></span><span dir="rtl"></span>:</span
+            ></b
+          >
+          <ol start="1" type="1">
+            <li dir="ltr">
+              Less suitable for situations where the number of iterations isn’t
+              known in advance<span dir="rtl"></span><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+            <li dir="ltr">
+              They can become complex and hard to read when nested deeply<span
+                dir="rtl"
+              ></span
+              ><span dir="rtl"></span
+              ><span lang="he" dir="rtl" xml:lang="he"
+                ><span dir="rtl"></span><span dir="rtl"></span>.</span
+              >
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <p dir="ltr"><b>Conditional Statements:</b></p>
+
+  <p dir="ltr">
+    1.&nbsp;&nbsp;&nbsp;&nbsp; <span dir="ltr"></span><b>If-Else Statements</b
+    ><span dir="rtl"></span><span dir="rtl"></span
+    ><b
+      ><span lang="he" dir="rtl" xml:lang="he"
+        ><span dir="rtl"></span><span dir="rtl"></span>:</span
+      ></b
+    >
+  </p>
+
+  <ol start="1" type="1">
+    <li>
+      <ol start="1" type="1">
+        <li dir="ltr">
+          <b>Benefits:&nbsp;</b>Used to branch the code, adding flexibility,
+          used for a wide range of conditions. Ideal for handling multiple
+          conditions that are not mutually exclusive<span dir="rtl"></span
+          ><span dir="rtl"></span
+          ><span lang="he" dir="rtl" xml:lang="he"
+            ><span dir="rtl"></span><span dir="rtl"></span>.</span
+          >
+        </li>
+        <li dir="ltr">
+          <b>Drawbacks:</b>&nbsp;Can become unwieldy with nested or multiple
+          conditions, impacting readability<span dir="rtl"></span
+          ><span dir="rtl"></span
+          ><span lang="he" dir="rtl" xml:lang="he"
+            ><span dir="rtl"></span><span dir="rtl"></span>.</span
+          >
+        </li>
+        <li dir="ltr">
+          <b>Application:</b>&nbsp;Complex decision-making scenarios where
+          conditions vary significantly<span dir="rtl"></span
+          ><span dir="rtl"></span
+          ><span lang="he" dir="rtl" xml:lang="he"
+            ><span dir="rtl"></span><span dir="rtl"></span>.</span
+          >
+        </li>
+      </ol>
+    </li>
+    <li dir="ltr">
+      <b>Switch Statements</b><span dir="rtl"></span><span dir="rtl"></span
+      ><b
+        ><span lang="he" dir="rtl" xml:lang="he"
+          ><span dir="rtl"></span><span dir="rtl"></span>:</span
+        ></b
+      >
+      <ol start="1" type="1">
+        <li dir="ltr">
+          <b>Benefits:</b>&nbsp;Clarity and conciseness in scenarios with
+          multiple mutually exclusive conditions. Often more readable than
+          nested if-else<span dir="rtl"></span><span dir="rtl"></span
+          ><span lang="he" dir="rtl" xml:lang="he"
+            ><span dir="rtl"></span><span dir="rtl"></span>.</span
+          >
+        </li>
+        <li dir="ltr">
+          <b>Drawbacks:&nbsp;</b>Limited to certain data types (int, char,
+          string, etc.) and not as flexible as if-else<span dir="rtl"></span
+          ><span dir="rtl"></span
+          ><span lang="he" dir="rtl" xml:lang="he"
+            ><span dir="rtl"></span><span dir="rtl"></span>.</span
+          >
+        </li>
+        <li dir="ltr">
+          <b>Application:</b>&nbsp;Menus or operations based on user-defined or
+          specific inputs.
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <p dir="ltr">
+    Combining if-else and switch statements can leverage the strengths of both.
+    For example, initial conditions can be evaluated using if-else for more
+    complex checks, followed by a switch statement for specific, discrete
+    options. This approach can enhance code readability and maintainability
+    while handling complex decision-making processes effectively.
+  </p>
+
+  <p dir="ltr">
+    In a project involving user input processing, I used if-else statements for
+    initial validation (e.g., checking the input type or range). Once validated,
+    a switch statement was used for executing specific functions based on the
+    input. This combination helped make the code much more reliable and
+    readable, not to mention easier to maintain and debug.
+  </p>
+
+  <p dir="ltr">
+    choosing between when to use an if-else or switch statement largely depends
+    on the specific requirements of the scenario. If-else is more suitable for
+    complex, varied conditions, while the switch case is ideal for simpler,
+    discrete value checks. Combining both can offer a balanced approach in more
+    intricate scenarios.
+  </p>
+  <p dir="ltr"></p>
+  <p></p>
+  <p></p>
+</div>

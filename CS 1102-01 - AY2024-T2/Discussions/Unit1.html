@@ -1,0 +1,116 @@
+<div class="post-message pr-md-5" id="post-content-29135541">
+  <ol id="yui_3_17_2_1_1702844922182_240">
+    <li>
+      <h4>Variables and data types</h4>
+      <p>
+        In Java, as in most programming languages variables and datatypes are
+        the building blocks of programming. Variables act as storage for for
+        data kind of like little boxes. while data types represent the type of
+        data we can put in the box. Java has two types of data:
+      </p>
+      <ol>
+        <li>
+          <strong>Primitive</strong><br />these include: Numeric, Character, and
+          Boolean types.<br />where the data is the value required to be stored.
+        </li>
+        <li>
+          <strong>Reference</strong><br />these are objects and arrays which
+          unlike primitive types instead of storing the value in the variable we
+          store the memory address to the actual data which is stored elsewhere.
+          this allows us also to reference and access the same object from
+          multiple variables.
+        </li>
+      </ol>
+      Its important to use and understand each of the types and where it is best
+      to use each one, since using for example a data type of long where a data
+      type of int is sufficient is a waste of system memory and resources.
+    </li>
+    <li>
+      <h4>Operator precedence</h4>
+      <p>
+        This dictates how the order in which Java evaluates commands and
+        equations. its important that we make sure we understand the order of
+        execution since we my expect a result but receive something else. for
+        instance:<br />
+      </p>
+      <pre><span style="color:rgb(239,69,64);">int res = 10 + 3 * 2; // res = 16</span></pre>
+      we may have wanted to first add the 10 and the 3 and only after that
+      multiply by 2, but since multiplication is of higher order it is executed
+      first.<br />So if for instance we did want to change the order we could
+      add parenthesis around the part we want executed first. this would make
+      that part higher ordered and execute first.<br /><br />
+      <pre><span style="color:rgb(239,69,64);">int res = (10 + 3) * 2; // res = 26</span></pre>
+      So now we see that understanding the order of execution and how we can
+      change the order can help us understand and make sure that the result we
+      want and the result we get are the same.
+    </li>
+    <li>
+      <h4>Significance and Applications of Conditionals in Java</h4>
+      Conditionals are one of the most basic tools in programming they allow us
+      to transform our code from a one dimensional flow of code into a complex
+      multi-branched code tree that executes different code in different
+      conditions resulting in different results.
+      <ol>
+        <li>
+          <strong>If-Else<br /></strong>the most common conditional command,
+          executes blocks of code based on the result of a condition where one
+          block is executed if the condition is true or a second (optional)
+          block is executed if the condition is false. for example:<br />
+          <pre><span style="color:rgb(239,69,64);">int score = 50;
+if (score &gt; 50) {
+	System.out.println("Pass");
+} else {
+	System.out.println("Fail");
+}</span></pre>
+        </li>
+        <li>
+          <strong>Switch case<br /></strong>Best used when we have a condition
+          that is dependant on the value of a single variable.it's more readable
+          when we have multiple scenarios for a single variable since each is
+          represented by a single case. for example:<br /><br />
+          <pre><span style="color:rgb(239,69,64);">int dayOfWeek = 3;
+String message;
+
+switch (dayOfWeek) {
+	case 1:
+		message = "Monday: Start of a new week!";
+		break;
+	case 2:
+		message = "Tuesday: Keep going!";
+		break;
+	case 3:
+		message = "Wednesday: Halfway through!";
+		break;
+	case 4:
+		message = "Thursday: Almost there!";
+		break;
+	case 5:
+		message = "Friday: Weekend is near!";
+		break;
+	case 6:
+		message = "Saturday: Enjoy the weekend!";
+		break;
+	case 7:
+		message = "Sunday: Rest day!";
+		break;
+	default:
+		message = "Invalid day: Please enter a number between 1 and 7.";
+}
+System.out.println(message);</span></pre>
+        </li>
+        <li>
+          <strong>Ternary</strong><br />A short hand for the if-else condition
+          helps us make our code more compact and readable in some cases. here
+          we too present a condition and if it is true the first part of the
+          code is used (a) and if the condition is false the second part is used
+          (b). this is very useful when we want to condition the value of a
+          variable on a condition.<br />For example:&nbsp;<br />
+          <pre><span style="color:rgb(239,69,64);">int result = (a &gt; b) ? a : b;
+</span>
+</pre>
+          <br />
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
