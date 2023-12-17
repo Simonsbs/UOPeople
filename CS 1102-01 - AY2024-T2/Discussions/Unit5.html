@@ -1,0 +1,123 @@
+<div class="post-message pr-md-5" id="post-content-30124197">
+  <p dir="ltr" style="text-align: left"></p>
+  <p dir="ltr">
+    Encapsulation is a really interesting and important principle in OOP (Object
+    Oriented Programming). It helps developers build modular, reusable code but
+    also helps promote and add a security layer to the code. This also helps
+    ensure the data integrity of the objects we design by only allowing access
+    to the parts we want and how we want.
+  </p>
+
+  <p dir="ltr">
+    At its core, encapsulation is all about bundling functions, methods,
+    properties and fields into a single object defined in a class item. The
+    functions and methods in the code itself control access to the different
+    parts of the class object. for instance, a class that defines a Student
+    might have a "firstName" and "lastName" variable stored in it but to modify
+    the values in those variables we only allow access via a function called
+    "updateFullName" which verifies that the name provided adhere to the
+    standards and rules set by the application business logic.
+  </p>
+
+  <p dir="ltr">
+    Access control is a key tool when dealing with encapsulation and is done by
+    using the access modifiers:
+  </p>
+
+  <ul type="disc">
+    <li dir="ltr">
+      Private - Allows access only from within&nbsp; the scope of the class
+    </li>
+    <li dir="ltr">
+      Public - Allows access from anywhere, inside or outside the class scope
+    </li>
+    <li dir="ltr">
+      Protected - represents a middle ground between private and public allowing
+      access from inheriting classes in the same package but blocking access
+      from outside the package.
+    </li>
+  </ul>
+
+  <p dir="ltr">
+    These modifiers allow us to control what parts and data are accessible in
+    our object from both within our package and from outside access. An example
+    would be a "BankAccount" object that might set the "deposit" and “withdraw”
+    (or any other getter or setter) methods as public while the variable that
+    stores the current bank account balance is safely controlled and protected
+    using the private modifier. This way we can fully control the flow of data
+    going into and out of our variable. This is very important when we later
+    reach a point when thread safety and transactions come into play. It's also
+    important to note that even with the access modifier we would still want to
+    add code verification and user authentication.
+  </p>
+
+  <p dir="ltr">
+    When we use encapsulation properly we can help ourselves by building code
+    that is both secure and less prone to bugs and issues. And also the code
+    becomes much easier to reuse in future projects. For instance, we can build
+    a strong and reliable base class that has all types of functions and
+    features such as user authentication, build it once and re-use it throughout
+    our project and possibly even other projects.
+  </p>
+
+  <p dir="ltr">
+    In conclusion, when you think of encapsulation you need to keep in mind the
+    following: code organization, data integrity, security, maintainable code,
+    and reusability. Making it a crucial part of programming and should be
+    considered throughout all of the development stages.
+  </p>
+  <p dir="ltr">
+    <span style="font-size: 0.9375rem"
+      >Let’s look at the following class as an example:</span
+    >
+  </p>
+  <pre
+    id="yui_3_17_2_1_1702844557442_288"
+  ><span style="color:rgb(0,46,184);">public class BankAccount {
+    // Private members: accessible only within this class
+    private String accountOwner;
+    private double balance;
+
+    // Constructor to initialize BankAccount
+    public BankAccount(String accountOwner, double initialBalance) {
+        this.accountOwner = accountOwner;
+        this.balance = initialBalance;
+    }
+
+    // Public method to deposit money into the account
+    public void deposit(double amount) {
+        if (amount &gt; 0) {
+            balance += amount;
+        }
+    }
+
+    // Public method to withdraw money from the account
+    public boolean withdraw(double amount) {
+        if (amount &gt; 0 &amp;&amp; balance &gt;= amount) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    // Public method to check the balance
+    public double getBalance() {
+        return balance;
+    }
+
+    // Public method to get the account owner
+    public String getAccountOwner() {
+        return accountOwner;
+    }
+}</span></pre>
+  <p id="yui_3_17_2_1_1702844557442_287">
+    <span style="color: rgb(51, 51, 51)"
+      >* In the example above we encapsulate the two local variables located in
+      the class, and we allow access to them only via our public methods where
+      we control and monitor the value in the variable not allowing it to go
+      below 0 (no overdraft). we could easily add other verifications and checks
+      to the code limiting access or logging transactions.</span
+    >
+  </p>
+  <p></p>
+</div>
