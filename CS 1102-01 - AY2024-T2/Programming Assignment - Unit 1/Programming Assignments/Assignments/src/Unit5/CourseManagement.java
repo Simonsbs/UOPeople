@@ -9,7 +9,7 @@ public class CourseManagement {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        initializeSystem(); // Initialize the system with predefined data
+        initializeSystem();
 
         hr();
         System.out.println("| Welcome to the Hogwarts Course Management System. |");
@@ -168,7 +168,7 @@ public class CourseManagement {
     }
 
     private static void calculateOverallGrades() {
-        System.out.print("Enter student ID to calculate GPA: ");
+        System.out.print("Enter student ID to calculate OWL's: ");
         String studentId = scanner.next();
         Student student = findStudentById(studentId);
         if (student == null) {
@@ -176,8 +176,8 @@ public class CourseManagement {
             return;
         }
 
-        float gpa = student.getGPA();
-        System.out.println("Student's GPA: " + gpa);
+        float owl = student.getGPA();
+        System.out.println("Student's OWL's: " + owl);
     }
 
     private static Student findStudentById(String id) {
