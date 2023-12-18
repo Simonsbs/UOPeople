@@ -11,21 +11,26 @@ public class CourseManagement {
     public static void main(String[] args) {
         initializeSystem(); // Initialize the system with predefined data
 
-        System.out.println("Welcome to the Hogwarts Course Management System.");
-        System.out.println("Please select an option below.");
+        hr();
+        System.out.println("| Welcome to the Hogwarts Course Management System. |");
+        System.out.println("| Please select an option below.                    |");
 
         boolean exit = false;
         while (!exit) {
+            hr();
             System.out.println("System Menu:");
             System.out.println("1. Add a new magic course");
             System.out.println("2. Add a new Hogwarts student");
             System.out.println("3. Enroll a student in a magic course");
             System.out.println("4. Assign a grade for magical studies");
             System.out.println("5. Calculate OWL's and NEWT's");
-            System.out.println("6. Exit");
+            System.out.println("6. List all students");
+            System.out.println("7. List all courses");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice:");
 
             int choice = scanner.nextInt();
+            hr();
             switch (choice) {
                 case 1:
                     addCourse();
@@ -43,6 +48,12 @@ public class CourseManagement {
                     calculateOverallGrades();
                     break;
                 case 6:
+                    listAllStudents();
+                    break;
+                case 7:
+                    listAllCourses();
+                    break;
+                case 8:
                     exit = true;
                     break;
                 default:
@@ -53,6 +64,10 @@ public class CourseManagement {
 
         System.out.println("Thank you for using the Hogwarts Course Management System.");
         System.out.println("Have a magical day!");
+    }
+
+    private static void hr() {
+        System.out.println("-----------------------------------------------------");
     }
 
     private static void initializeSystem() {
@@ -181,5 +196,28 @@ public class CourseManagement {
             }
         }
         return null;
+    }
+
+    private static void listAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students registered.");
+            return;
+        }
+        System.out.println("List of all Hogwarts students:");
+        for (Student student : students) {
+            System.out.println("ID: " + student.getID() + ", Name: " + student.getName());
+        }
+    }
+
+    private static void listAllCourses() {
+        if (courses.isEmpty()) {
+            System.out.println("No courses available.");
+            return;
+        }
+        System.out.println("List of all magic courses:");
+        for (Course course : courses) {
+            System.out.println("Code: " + course.getCourseCode() + ", Name: " + course.getName() + ", Capacity: "
+                    + course.getMaxCapacity());
+        }
     }
 }
