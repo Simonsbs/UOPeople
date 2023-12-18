@@ -28,6 +28,7 @@ public class CourseManagement {
         hr();
         System.out.println("| Welcome to the Hogwarts Course Management System. |");
         System.out.println("| Please select an option below.                    |");
+        System.out.println("|    - Remember, beurocracy is the real magic -     |");
 
         boolean exit = false;
         while (!exit) {
