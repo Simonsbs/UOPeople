@@ -26,39 +26,38 @@ public class CourseManagement {
             System.out.println("5. Calculate OWL's for a student");
             System.out.println("6. List all students");
             System.out.println("7. List all courses");
-            System.out.println("8. Exit");
+            System.out.println("E. Exit");
             System.out.print("Enter your choice:");
 
-            int choice = scanner.nextInt();
+            String choice = scanner.next();
             hr();
-            switch (choice) {
-                case 1:
+            switch (choice.toUpperCase()) {
+                case "1":
                     addCourse();
                     break;
-                case 2:
+                case "2":
                     addStudent();
                     break;
-                case 3:
+                case "3":
                     enrollStudent();
                     break;
-                case 4:
+                case "4":
                     assignGrade();
                     break;
-                case 5:
+                case "5":
                     calculateOverallGrades();
                     break;
-                case 6:
+                case "6":
                     listAllStudents();
                     break;
-                case 7:
+                case "7":
                     listAllCourses();
                     break;
-                case 8:
+                case "E":
                     exit = true;
                     break;
                 default:
                     System.out.println("Invalid choice. try again muggle!");
-
             }
         }
 
