@@ -9,15 +9,21 @@ public class CourseManagement {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        initializeSystem(); // Initialize the system with predefined data
+
+        System.out.println("Welcome to the Hogwarts Course Management System.");
+        System.out.println("Please select an option below.");
+
         boolean exit = false;
         while (!exit) {
-            System.out.println("Course Management System");
-            System.out.println("1. Add a new course");
-            System.out.println("2. Enroll a student");
-            System.out.println("3. Assign grade");
-            System.out.println("4. Calculate overall grades");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("System Menu:");
+            System.out.println("1. Add a new magic course");
+            System.out.println("2. Add a new Hogwarts student");
+            System.out.println("3. Enroll a student in a magic course");
+            System.out.println("4. Assign a grade for magical studies");
+            System.out.println("5. Calculate OWL's and NEWT's");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice:");
 
             int choice = scanner.nextInt();
             switch (choice) {
@@ -25,21 +31,53 @@ public class CourseManagement {
                     addCourse();
                     break;
                 case 2:
-                    enrollStudent();
+                    addStudent();
                     break;
                 case 3:
-                    assignGrade();
+                    enrollStudent();
                     break;
                 case 4:
-                    calculateOverallGrades();
+                    assignGrade();
                     break;
                 case 5:
+                    calculateOverallGrades();
+                    break;
+                case 6:
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. try again muggle!");
+
             }
         }
+
+        System.out.println("Thank you for using the Hogwarts Course Management System.");
+        System.out.println("Have a magical day!");
+    }
+
+    private static void initializeSystem() {
+        // Add predefined courses
+        courses.add(new Course("POT101", "Potions", 5));
+        courses.add(new Course("DADA101", "Defense Against the Dark Arts", 5));
+        courses.add(new Course("CHRM101", "Charms", 5));
+        courses.add(new Course("HERB101", "Herbology", 5));
+
+        // Add predefined students
+        students.add(new Student("Harry Potter", "001"));
+        students.add(new Student("Hermione Granger", "002"));
+        students.add(new Student("Ron Weasley", "003"));
+        students.add(new Student("Draco Malfoy", "004"));
+    }
+
+    private static void addStudent() {
+        System.out.print("Enter student name: ");
+        String name = scanner.next();
+        System.out.print("Enter student ID: ");
+        String id = scanner.next();
+
+        Student student = new Student(name, id);
+        students.add(student);
+        System.out.println("Student added successfully.");
     }
 
     private static void addCourse() {
