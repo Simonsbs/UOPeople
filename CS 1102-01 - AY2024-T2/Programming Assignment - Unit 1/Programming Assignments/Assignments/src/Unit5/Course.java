@@ -1,3 +1,4 @@
+// Course.java
 package Unit5;
 
 /**
@@ -24,6 +25,10 @@ public class Course {
         this.name = name;
         this.maxCapacity = maxCapacity;
         this.enrolledStudents = 0;
+    }
+
+    public boolean canEnroll() {
+        return enrolledStudents < maxCapacity;
     }
 
     /**

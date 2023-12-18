@@ -1,3 +1,4 @@
+// Student.java
 package Unit5;
 
 import java.util.ArrayList;
@@ -91,12 +92,12 @@ public class Student {
         return new ArrayList<>(enrolledCourses); // Return a copy to prevent external modification
     }
 
-    /**
-     * Gets the grades of the student for their courses.
-     *
-     * @return the list of grades for each enrolled course.
-     */
-    public ArrayList<String> getGrades() {
-        return new ArrayList<>(grades); // Return a copy to prevent external modification
+    public float getGPA() {
+        float totalGrade = 0.0f;
+        for (EnrolledCourse course : enrolledCourses) {
+            totalGrade += course.getGrade();
+        }
+
+        return totalGrade / enrolledCourses.size();
     }
 }
