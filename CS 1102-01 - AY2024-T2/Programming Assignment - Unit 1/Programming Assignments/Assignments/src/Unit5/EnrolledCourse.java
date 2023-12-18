@@ -1,42 +1,52 @@
-// EnrolledCourse.java
-
 package Unit5;
 
 import java.util.Date;
 
+/**
+ * Represents a course in which a student is enrolled.
+ * This class extends the Course class by adding a grade and the date of
+ * enrollment.
+ */
 public class EnrolledCourse extends Course {
     private float grade;
     private Date dateEnrolled;
 
+    /**
+     * Constructor for EnrolledCourse class.
+     * Initializes an enrolled course based on a given Course object.
+     * Sets the initial grade to 0.0 and the enrollment date to the current date.
+     *
+     * @param course The Course object to base the EnrolledCourse on
+     */
     public EnrolledCourse(Course course) {
         super(course.getCourseCode(), course.getName(), course.getMaxCapacity());
-
         this.grade = 0.0f;
         this.dateEnrolled = new Date();
     }
 
+    /**
+     * Gets the grade of the student in this course.
+     *
+     * @return The numerical grade
+     */
     public float getGrade() {
         return grade;
     }
 
-    public String getGradeAsString() {
-        if (grade >= 90.0f) {
-            return "A";
-        } else if (grade >= 80.0f) {
-            return "B";
-        } else if (grade >= 70.0f) {
-            return "C";
-        } else if (grade >= 60.0f) {
-            return "D";
-        } else {
-            return "F";
-        }
-    }
-
+    /**
+     * Sets the grade of the student for this course.
+     *
+     * @param grade The numerical grade to set
+     */
     public void setGrade(float grade) {
         this.grade = grade;
     }
 
+    /**
+     * Gets the date when the student enrolled in the course.
+     *
+     * @return The date of enrollment
+     */
     public Date getDateEnrolled() {
         return dateEnrolled;
     }
