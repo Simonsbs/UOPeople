@@ -23,7 +23,7 @@ public class CourseManagement {
             System.out.println("2. Add a new Hogwarts student");
             System.out.println("3. Enroll a student in a magic course");
             System.out.println("4. Assign a grade for magical studies");
-            System.out.println("5. Calculate OWL's and NEWT's");
+            System.out.println("5. Calculate OWL's for a student");
             System.out.println("6. List all students");
             System.out.println("7. List all courses");
             System.out.println("8. Exit");
