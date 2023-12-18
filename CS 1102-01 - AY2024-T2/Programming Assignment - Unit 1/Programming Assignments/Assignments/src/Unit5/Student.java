@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public class Student {
     private String name;
     private String ID;
-    private ArrayList<Course> enrolledCourses;
-    private ArrayList<String> grades;
+    private ArrayList<EnrolledCourse> enrolledCourses;
 
     /**
      * Constructor for the Student class.
@@ -23,7 +22,6 @@ public class Student {
         this.name = name;
         this.ID = ID;
         this.enrolledCourses = new ArrayList<>();
-        this.grades = new ArrayList<>();
     }
 
     /**
@@ -32,8 +30,7 @@ public class Student {
      * @param course the course to enroll in.
      */
     public void enrollInCourse(Course course) {
-        enrolledCourses.add(course);
-        grades.add(""); // Placeholder for grade
+        enrolledCourses.add(new EnrolledCourse(course));
     }
 
     /**
@@ -43,10 +40,10 @@ public class Student {
      * @param grade  the grade to assign.
      */
     public void assignGrade(Course course, String grade) {
-        int courseIndex = enrolledCourses.indexOf(course);
-        if (courseIndex != -1) {
-            grades.set(courseIndex, grade);
-        }
+        // int courseIndex = enrolledCourses.indexOf(course);
+        // if (courseIndex != -1) {
+        // grades.set(courseIndex, grade);
+        // }
     }
 
     /**
@@ -90,7 +87,7 @@ public class Student {
      *
      * @return the list of enrolled courses.
      */
-    public ArrayList<Course> getEnrolledCourses() {
+    public ArrayList<EnrolledCourse> getEnrolledCourses() {
         return new ArrayList<>(enrolledCourses); // Return a copy to prevent external modification
     }
 
