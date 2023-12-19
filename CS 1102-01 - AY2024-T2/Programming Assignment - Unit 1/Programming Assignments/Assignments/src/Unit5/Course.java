@@ -1,11 +1,9 @@
-// Course.java
 package Unit5;
 
 /**
  * Represents a course offered at the university.
  * This class includes information about the course code, name, maximum
- * capacity,
- * and the current number of enrolled students.
+ * capacity, and the current number of enrolled students.
  */
 public class Course {
     private String courseCode;
@@ -16,7 +14,6 @@ public class Course {
     /**
      * Constructor for the Course class.
      * Initializes a new course with the specified code, name, and maximum capacity.
-     * Initially, there are no enrolled students.
      *
      * @param courseCode  the unique code for the course
      * @param name        the name of the course
@@ -38,6 +35,17 @@ public class Course {
      */
     public boolean canEnroll() {
         return enrolledStudents < maxCapacity;
+    }
+
+    /**
+     * Increments the number of enrolled students by one, if the course is not full.
+     */
+    public void incrementEnrolledStudents() {
+        if (canEnroll()) {
+            enrolledStudents++;
+        } else {
+            System.out.println("Course is full, cannot enroll any more students.");
+        }
     }
 
     /**
@@ -74,18 +82,6 @@ public class Course {
      */
     public int getEnrolledStudents() {
         return enrolledStudents;
-    }
-
-    /**
-     * Increments the number of enrolled students by one, if the course is not full.
-     * Displays a message if the course has reached its maximum capacity.
-     */
-    public void incrementEnrolledStudents() {
-        if (enrolledStudents < maxCapacity) {
-            enrolledStudents++;
-        } else {
-            System.out.println("Course is full, Cannot enroll any more students.");
-        }
     }
 
     /**

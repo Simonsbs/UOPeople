@@ -39,7 +39,11 @@ public class EnrolledCourse extends Course {
      * @param grade The numerical grade to set
      */
     public void setGrade(float grade) {
-        this.grade = grade;
+        if (grade >= 0.0f && grade <= 100.0f) {
+            this.grade = grade;
+        } else {
+            System.out.println("Invalid grade. Grade must be between 0.0 and 100.0.");
+        }
     }
 
     /**
@@ -49,5 +53,15 @@ public class EnrolledCourse extends Course {
      */
     public Date getDateEnrolled() {
         return dateEnrolled;
+    }
+
+    /**
+     * Prints the details of the enrolled course including the grade.
+     */
+    public void printEnrolledCourseDetails() {
+        System.out.println("Course: " + getName() +
+                ", Code: " + getCourseCode() +
+                ", Enrolled On: " + dateEnrolled +
+                ", Grade: " + grade);
     }
 }
