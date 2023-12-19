@@ -1,19 +1,35 @@
+// CourseManagement.java
 package Unit5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The CourseManagement class is the main class of the Hogwarts Course
+ * Management System.
+ * It provides a menu for the user to interact with the system.
+ */
 public class CourseManagement {
     private static ArrayList<Course> courses = new ArrayList<>();
     private static ArrayList<Student> students = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * The main method of the CourseManagement class.
+     * Initializes the system, displays a welcome message, and processes user
+     * commands.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         initializeSystem();
         displayWelcomeMessage();
         processUserCommands();
     }
 
+    /**
+     * Displays a welcome message to the user.
+     */
     private static void displayWelcomeMessage() {
         hr();
         System.out.println("| Welcome to the Hogwarts Course Management System. |");
@@ -21,6 +37,9 @@ public class CourseManagement {
         System.out.println("|    - Remember, bureaucracy is the real magic -   |");
     }
 
+    /**
+     * Displays the menu and processes user selection.
+     */
     private static void processUserCommands() {
         boolean exit = false;
         while (!exit) {
@@ -60,6 +79,9 @@ public class CourseManagement {
         System.out.println("Have a magical day!");
     }
 
+    /**
+     * Displays the menu.
+     */
     private static void displayMenu() {
         hr();
         System.out.println("Magical System Menu:");
@@ -74,6 +96,9 @@ public class CourseManagement {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * Initializes the system with some courses and students.
+     */
     private static void initializeSystem() {
         courses.add(new Course("POT101", "Potions", 5));
         courses.add(new Course("DADA101", "Defense Against the Dark Arts", 5));
@@ -86,6 +111,9 @@ public class CourseManagement {
         students.add(new Student("Draco Malfoy", "004"));
     }
 
+    /**
+     * Adds a new course to the system.
+     */
     private static void addCourse() {
         System.out.print("Enter course code: ");
         String code = scanner.next();
@@ -110,6 +138,9 @@ public class CourseManagement {
         System.out.println("Course added successfully.");
     }
 
+    /**
+     * Adds a new student to the system.
+     */
     private static void addStudent() {
         System.out.print("Enter student name: ");
         String name = scanner.next();
@@ -127,6 +158,9 @@ public class CourseManagement {
         System.out.println("Student added successfully.");
     }
 
+    /**
+     * Enrolls a student in a course.
+     */
     private static void enrollStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.next();
@@ -149,6 +183,9 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Sets a grade for a student in a course.
+     */
     private static void setGrade() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.next();
@@ -180,6 +217,9 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Calculates the final grade for a student.
+     */
     private static void calculateFinalGrades() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.next();
@@ -191,6 +231,9 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Lists all students in the system.
+     */
     private static void listAllStudents() {
         if (students.isEmpty()) {
             System.out.println("No students registered.");
@@ -201,6 +244,9 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Lists all courses in the system.
+     */
     private static void listAllCourses() {
         if (courses.isEmpty()) {
             System.out.println("No courses available.");
@@ -211,6 +257,12 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Finds a student by ID.
+     *
+     * @param id the ID of the student to find
+     * @return the student with the given ID, or null if not found
+     */
     private static Student findStudentById(String id) {
         for (Student student : students) {
             if (student.getID().equals(id)) {
@@ -220,6 +272,12 @@ public class CourseManagement {
         return null;
     }
 
+    /**
+     * Finds a course by code.
+     *
+     * @param code the code of the course to find
+     * @return the course with the given code, or null if not found
+     */
     private static Course findCourseByCode(String code) {
         for (Course course : courses) {
             if (course.getCourseCode().equals(code)) {
@@ -229,6 +287,9 @@ public class CourseManagement {
         return null;
     }
 
+    /**
+     * Prints a horizontal line.
+     */
     private static void hr() {
         System.out.println("-----------------------------------------------------");
     }
