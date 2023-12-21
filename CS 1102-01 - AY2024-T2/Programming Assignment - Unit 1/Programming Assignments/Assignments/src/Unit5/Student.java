@@ -34,6 +34,13 @@ public class Student {
      * @return a message indicating the result of the enrollment attempt
      */
     public String enrollInCourse(Course course) {
+        // Check if student is already enrolled in the course
+        for (EnrolledCourse enrolledCourse : enrolledCourses) {
+            if (enrolledCourse.getCourseCode().equals(course.getCourseCode())) {
+                return "Student already enrolled in " + course.getName() + ".";
+            }
+        }
+
         String enrollmentMessage = course.enrollStudent(this);
         // If the enrollment was successful, add the course to the student's list of
         // enrolled courses
@@ -73,6 +80,8 @@ public class Student {
     public static Student addNewStudent(Scanner scanner, ArrayList<Student> existingStudents) {
         System.out.print("Enter student name: ");
         String name = scanner.next();
+        scanner.nextLine(); // Consume the rest of the line after reading name
+
         String id;
         // Loop until a valid ID is entered
         while (true) {
@@ -86,6 +95,29 @@ public class Student {
             }
         }
         return new Student(name, id);
+    }
+
+    public static void editStudentInfo(Scanner scanner, ArrayList<Student> students) {
+        System.out.print("Enter student ID: ");
+        String studentId = scanner.next();
+        Student student = findStudentById(studentId, students);
+        if (student != null) {
+            System.out.print("Enter new student name: ");
+            String newName = scanner.next();
+            student.setName(newName);
+            System.out.println("Student information updated successfully.");
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    private static Student findStudentById(String id, ArrayList<Student> students) {
+        for (Student student : students) {
+            if (student.getID().equals(id)) {
+                return student;
+            }
+        }
+        return null;
     }
 
     /**
@@ -208,6 +240,13 @@ public class Student {
      */
     public void print() {
         System.out.println("ID: " + ID + ", Name: " + name);
+
+        // Check if the student is not enrolled in any courses
+        if (enrolledCourses.isEmpty()) {
+            System.out.println("Not enrolled in any courses (yet).");
+            return;
+        }
+
         System.out.println("Enrolled Courses:");
         // Loop through the student's enrolled courses and print them
         for (EnrolledCourse course : enrolledCourses) {

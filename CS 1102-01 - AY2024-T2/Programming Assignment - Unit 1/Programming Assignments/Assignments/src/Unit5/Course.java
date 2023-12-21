@@ -2,6 +2,7 @@
 package Unit5;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Represents a course offered at the university.
@@ -58,7 +59,7 @@ public class Course {
      * @param newName     the new name of the course
      * @param newCapacity the new maximum capacity of the course
      */
-    public void editCourseInfo(String newName, int newCapacity) {
+    private void editCourseInfo(String newName, int newCapacity) {
         this.name = newName;
         this.maxCapacity = newCapacity;
     }
@@ -79,6 +80,33 @@ public class Course {
 
         int capacity = Utils.readPositiveInt(scanner, "Enter max capacity: ");
         return new Course(code, name, capacity);
+    }
+
+    public static void editCourseInfo(Scanner scanner, ArrayList<Course> courses) {
+        System.out.print("Enter course code: ");
+        String courseCode = scanner.next();
+        scanner.nextLine();
+
+        Course course = findCourseByCode(courseCode, courses);
+        if (course != null) {
+            System.out.print("Enter new course name: ");
+            String newName = scanner.nextLine();
+
+            int newCapacity = Utils.readPositiveInt(scanner, "Enter new max capacity: ");
+            course.editCourseInfo(newName, newCapacity);
+            System.out.println("Course information updated successfully.");
+        } else {
+            System.out.println("Invalid course code.");
+        }
+    }
+
+    private static Course findCourseByCode(String code, ArrayList<Course> courses) {
+        for (Course course : courses) {
+            if (course.getCourseCode().equals(code)) {
+                return course;
+            }
+        }
+        return null;
     }
 
     /**

@@ -34,7 +34,7 @@ public class CourseManagement {
         hr();
         System.out.println("| Welcome to the Hogwarts Course Management System. |");
         System.out.println("| Please select an option below.                    |");
-        System.out.println("|    - Remember, bureaucracy is the real magic -   |");
+        System.out.println("|    - Remember, bureaucracy is the real magic -    |");
     }
 
     /**
@@ -69,10 +69,10 @@ public class CourseManagement {
                     listAllCourses();
                     break;
                 case "8":
-                    editStudentInfo();
+                    Student.editStudentInfo(scanner, students);
                     break;
                 case "9":
-                    editCourseInfo();
+                    Course.editCourseInfo(scanner, courses);
                     break;
                 case "E":
                     exit = true;
@@ -102,48 +102,6 @@ public class CourseManagement {
         System.out.println("9. Edit a course's information");
         System.out.println("E. Exit");
         System.out.print("Enter your choice: ");
-    }
-
-    /**
-     * Edits a student's information.
-     */
-    private static void editStudentInfo() {
-        System.out.print("Enter student ID: ");
-        String studentId = scanner.next();
-        Student student = findStudentById(studentId);
-
-        // Check if the student exists
-        if (student != null) {
-            System.out.print("Enter new student name: ");
-            String name = scanner.next();
-            System.out.print("Enter new student ID: ");
-            String newId = scanner.next();
-
-            student.editStudentInfo(name, newId);
-            System.out.println("Student information updated successfully.");
-        } else {
-            System.out.println("Student not found.");
-        }
-    }
-
-    /**
-     * Edits a course's information.
-     */
-    private static void editCourseInfo() {
-        System.out.print("Enter course code: ");
-        String courseCode = scanner.next();
-        Course course = findCourseByCode(courseCode);
-
-        // Check if the course exists
-        if (course != null) {
-            System.out.print("Enter new course name: ");
-            String name = scanner.next();
-            int capacity = Utils.readPositiveInt(scanner, "Enter new max capacity: ");
-            course.editCourseInfo(name, capacity);
-            System.out.println("Course information updated successfully.");
-        } else {
-            System.out.println("Invalid course code.");
-        }
     }
 
     /**
