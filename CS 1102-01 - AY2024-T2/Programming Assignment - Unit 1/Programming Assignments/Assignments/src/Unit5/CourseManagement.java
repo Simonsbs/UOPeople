@@ -104,10 +104,15 @@ public class CourseManagement {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * Edits a student's information.
+     */
     private static void editStudentInfo() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.next();
         Student student = findStudentById(studentId);
+
+        // Check if the student exists
         if (student != null) {
             System.out.print("Enter new student name: ");
             String name = scanner.next();
@@ -121,10 +126,15 @@ public class CourseManagement {
         }
     }
 
+    /**
+     * Edits a course's information.
+     */
     private static void editCourseInfo() {
         System.out.print("Enter course code: ");
         String courseCode = scanner.next();
         Course course = findCourseByCode(courseCode);
+
+        // Check if the course exists
         if (course != null) {
             System.out.print("Enter new course name: ");
             String name = scanner.next();
@@ -150,6 +160,7 @@ public class CourseManagement {
         students.add(new Student("Ron Weasley", "003"));
         students.add(new Student("Draco Malfoy", "004"));
 
+        // Enroll all demo students in all demo courses
         for (Course course : courses) {
             for (Student student : students) {
                 student.enrollInCourse(course);
@@ -166,6 +177,9 @@ public class CourseManagement {
         System.out.println("Course added successfully.");
     }
 
+    /**
+     * Adds a new student to the system.
+     */
     private static void addStudent() {
         Student newStudent = Student.addNewStudent(scanner, students);
         students.add(newStudent);
@@ -184,6 +198,7 @@ public class CourseManagement {
         Student student = findStudentById(studentId);
         Course course = findCourseByCode(courseCode);
 
+        // Check if the student and course exist
         if (student != null && course != null) {
             String message = student.enrollInCourse(course);
             System.out.println(message);
@@ -206,6 +221,7 @@ public class CourseManagement {
         Student student = findStudentById(studentId);
         Course course = findCourseByCode(courseCode);
 
+        // Check if the student and course exist
         if (student != null && course != null) {
             student.setCourseGrade(course, grade);
             System.out.println("Grade set successfully.");
@@ -221,6 +237,8 @@ public class CourseManagement {
         System.out.print("Enter student ID: ");
         String studentId = scanner.next();
         Student student = findStudentById(studentId);
+
+        // Check if the student exists
         if (student != null) {
             student.printFinalGrade();
         } else {
@@ -232,9 +250,11 @@ public class CourseManagement {
      * Lists all students in the system.
      */
     private static void listAllStudents() {
+        // Check if there are no students
         if (students.isEmpty()) {
             System.out.println("No students registered.");
         } else {
+            // Loop through all students and print their information
             for (Student student : students) {
                 student.print();
             }
@@ -245,9 +265,11 @@ public class CourseManagement {
      * Lists all courses in the system.
      */
     private static void listAllCourses() {
+        // Check if there are no courses
         if (courses.isEmpty()) {
             System.out.println("No courses available.");
         } else {
+            // Loop through all courses and print their information
             for (Course course : courses) {
                 course.print();
             }
@@ -261,7 +283,9 @@ public class CourseManagement {
      * @return the student with the given ID, or null if not found
      */
     private static Student findStudentById(String id) {
+        // Loop through all students
         for (Student student : students) {
+            // If the student's ID matches, return the student
             if (student.getID().equals(id)) {
                 return student;
             }
@@ -276,7 +300,9 @@ public class CourseManagement {
      * @return the course with the given code, or null if not found
      */
     private static Course findCourseByCode(String code) {
+        // Loop through all courses
         for (Course course : courses) {
+            // If the course's code matches, return the course
             if (course.getCourseCode().equals(code)) {
                 return course;
             }

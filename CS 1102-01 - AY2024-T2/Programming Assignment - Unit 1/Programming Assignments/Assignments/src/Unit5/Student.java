@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The Student class represents a student in a university.
- * It stores the student's name, ID, and the courses they are enrolled in,
+ * The Student class represents a student.
+ * It stores the student's personal info and the courses they are enrolled in,
  * along with the grades for each course.
  */
 public class Student {
@@ -33,18 +33,10 @@ public class Student {
      * @param course the course to enroll in
      * @return a message indicating the result of the enrollment attempt
      */
-    // public String enrollInCourse(Course course) {
-    // if (course.canEnroll()) {
-    // EnrolledCourse enrolledCourse = new EnrolledCourse(course);
-    // enrolledCourses.add(enrolledCourse);
-    // course.incrementEnrolledStudents();
-    // return "Student enrolled in " + course.getName() + " successfully.";
-    // }
-    // return "Cannot enroll in " + course.getName() + ", course is full.";
-    // }
-
     public String enrollInCourse(Course course) {
         String enrollmentMessage = course.enrollStudent(this);
+        // If the enrollment was successful, add the course to the student's list of
+        // enrolled courses
         if (enrollmentMessage.contains("successfully")) {
             EnrolledCourse enrolledCourse = new EnrolledCourse(course);
             enrolledCourses.add(enrolledCourse);
@@ -59,7 +51,9 @@ public class Student {
      * @param grade  the grade to set
      */
     public void setCourseGrade(Course course, float grade) {
+        // Loop through the student's enrolled courses
         for (EnrolledCourse enrolledCourse : enrolledCourses) {
+            // If the student is enrolled in the specified course, set the grade
             if (enrolledCourse.getCourseCode().equals(course.getCourseCode())) {
                 enrolledCourse.setGrade(grade);
                 return;
@@ -68,23 +62,43 @@ public class Student {
         System.out.println("Student not enrolled in " + course.getName() + ".");
     }
 
+    /**
+     * Adds a new student to the system.
+     * 
+     * @param scanner          The scanner to read input from.
+     * @param existingStudents The list of existing students to check for duplicate
+     *                         IDs.
+     * @return The newly created student.
+     */
     public static Student addNewStudent(Scanner scanner, ArrayList<Student> existingStudents) {
         System.out.print("Enter student name: ");
         String name = scanner.next();
         String id;
+        // Loop until a valid ID is entered
         while (true) {
             System.out.print("Enter student ID: ");
             id = scanner.next();
-            if (!id.trim().isEmpty() && isUniqueId(id, existingStudents))
+            // Check if the ID is valid and unique
+            if (!id.trim().isEmpty() && isUniqueId(id, existingStudents)) {
                 break;
-            else
+            } else {
                 System.out.println("Invalid or duplicate ID. Please enter a unique ID.");
+            }
         }
         return new Student(name, id);
     }
 
+    /**
+     * Checks if a given ID is unique.
+     * 
+     * @param id       The ID to check.
+     * @param students The list of existing students to check against.
+     * @return True if the ID is unique, false otherwise.
+     */
     private static boolean isUniqueId(String id, ArrayList<Student> students) {
+        // Loop through the list of existing students
         for (Student student : students) {
+            // If the ID matches, return false
             if (student.getID().equals(id)) {
                 return false;
             }
@@ -146,13 +160,17 @@ public class Student {
      * @return the GPA of the student
      */
     public float getGPA() {
+        // If the student is not enrolled in any courses, return 0.0
         if (enrolledCourses.isEmpty()) {
             return 0.0f;
         }
         float totalGrade = 0.0f;
+        // Loop through the student's enrolled courses and add up the grades
         for (EnrolledCourse course : enrolledCourses) {
+            // Add the grade to the total
             totalGrade += course.getGrade();
         }
+        // Divide the total grade by the number of enrolled courses to get the average
         return totalGrade / enrolledCourses.size();
     }
 
@@ -190,6 +208,8 @@ public class Student {
      */
     public void print() {
         System.out.println("ID: " + ID + ", Name: " + name);
+        System.out.println("Enrolled Courses:");
+        // Loop through the student's enrolled courses and print them
         for (EnrolledCourse course : enrolledCourses) {
             System.out.println("Enrolled in: " + course.getName() + ", Grade: " + course.getGrade());
         }

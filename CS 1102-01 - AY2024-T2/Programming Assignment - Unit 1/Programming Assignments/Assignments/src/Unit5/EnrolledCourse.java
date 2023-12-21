@@ -40,6 +40,7 @@ public class EnrolledCourse extends Course {
      * @param grade The numerical grade to set
      */
     public void setGrade(float grade) {
+        // Check if the grade is within the valid range
         if (grade >= 0.0f && grade <= 100.0f) {
             this.grade = grade;
         } else {

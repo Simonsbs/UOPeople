@@ -44,6 +44,7 @@ public class Course {
      * Increments the number of enrolled students by one, if the course is not full.
      */
     public void incrementEnrolledStudents() {
+        // Check if the course is not full
         if (canEnroll()) {
             enrolledStudents++;
         } else {
@@ -62,6 +63,12 @@ public class Course {
         this.maxCapacity = newCapacity;
     }
 
+    /**
+     * Adds a new course to the system.
+     *
+     * @param scanner the scanner to read input from
+     * @return the new course
+     */
     public static Course addNewCourse(Scanner scanner) {
         System.out.print("Enter course code: ");
         String code = scanner.next();
@@ -74,7 +81,14 @@ public class Course {
         return new Course(code, name, capacity);
     }
 
+    /**
+     * Enrolls a student in the course.
+     *
+     * @param student the student to enroll
+     * @return a message indicating whether the student was enrolled successfully
+     */
     public String enrollStudent(Student student) {
+        // Check if the course is not full
         if (canEnroll()) {
             incrementEnrolledStudents();
             return "Student enrolled in " + this.name + " successfully.";
