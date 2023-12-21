@@ -2,6 +2,7 @@
 package Unit5;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * The Student class represents a student in a university.
@@ -32,14 +33,23 @@ public class Student {
      * @param course the course to enroll in
      * @return a message indicating the result of the enrollment attempt
      */
+    // public String enrollInCourse(Course course) {
+    // if (course.canEnroll()) {
+    // EnrolledCourse enrolledCourse = new EnrolledCourse(course);
+    // enrolledCourses.add(enrolledCourse);
+    // course.incrementEnrolledStudents();
+    // return "Student enrolled in " + course.getName() + " successfully.";
+    // }
+    // return "Cannot enroll in " + course.getName() + ", course is full.";
+    // }
+
     public String enrollInCourse(Course course) {
-        if (course.canEnroll()) {
+        String enrollmentMessage = course.enrollStudent(this);
+        if (enrollmentMessage.contains("successfully")) {
             EnrolledCourse enrolledCourse = new EnrolledCourse(course);
             enrolledCourses.add(enrolledCourse);
-            course.incrementEnrolledStudents();
-            return "Student enrolled in " + course.getName() + " successfully.";
         }
-        return "Cannot enroll in " + course.getName() + ", course is full.";
+        return enrollmentMessage;
     }
 
     /**
@@ -56,6 +66,30 @@ public class Student {
             }
         }
         System.out.println("Student not enrolled in " + course.getName() + ".");
+    }
+
+    public static Student addNewStudent(Scanner scanner, ArrayList<Student> existingStudents) {
+        System.out.print("Enter student name: ");
+        String name = scanner.next();
+        String id;
+        while (true) {
+            System.out.print("Enter student ID: ");
+            id = scanner.next();
+            if (!id.trim().isEmpty() && isUniqueId(id, existingStudents))
+                break;
+            else
+                System.out.println("Invalid or duplicate ID. Please enter a unique ID.");
+        }
+        return new Student(name, id);
+    }
+
+    private static boolean isUniqueId(String id, ArrayList<Student> students) {
+        for (Student student : students) {
+            if (student.getID().equals(id)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

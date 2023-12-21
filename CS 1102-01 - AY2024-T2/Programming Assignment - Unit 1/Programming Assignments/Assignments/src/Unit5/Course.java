@@ -1,6 +1,8 @@
 // Course.java
 package Unit5;
 
+import java.util.Scanner;
+
 /**
  * Represents a course offered at the university.
  * This class includes information about the course code, name, maximum
@@ -58,6 +60,26 @@ public class Course {
     public void editCourseInfo(String newName, int newCapacity) {
         this.name = newName;
         this.maxCapacity = newCapacity;
+    }
+
+    public static Course addNewCourse(Scanner scanner) {
+        System.out.print("Enter course code: ");
+        String code = scanner.next();
+        scanner.nextLine();
+
+        System.out.print("Enter course name: ");
+        String name = scanner.nextLine();
+
+        int capacity = Utils.readPositiveInt(scanner, "Enter max capacity: ");
+        return new Course(code, name, capacity);
+    }
+
+    public String enrollStudent(Student student) {
+        if (canEnroll()) {
+            incrementEnrolledStudents();
+            return "Student enrolled in " + this.name + " successfully.";
+        }
+        return "Cannot enroll in " + this.name + ", course is full.";
     }
 
     /**

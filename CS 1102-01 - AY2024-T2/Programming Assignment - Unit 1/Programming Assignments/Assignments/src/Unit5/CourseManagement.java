@@ -128,28 +128,11 @@ public class CourseManagement {
         if (course != null) {
             System.out.print("Enter new course name: ");
             String name = scanner.next();
-            int capacity = readPositiveInt("Enter new max capacity: ");
+            int capacity = Utils.readPositiveInt(scanner, "Enter new max capacity: ");
             course.editCourseInfo(name, capacity);
             System.out.println("Course information updated successfully.");
         } else {
             System.out.println("Invalid course code.");
-        }
-    }
-
-    private static int readPositiveInt(String prompt) {
-        int number;
-        while (true) {
-            System.out.print(prompt);
-            if (scanner.hasNextInt()) {
-                number = scanner.nextInt();
-                if (number > 0)
-                    return number;
-                else
-                    System.out.println("Value must be a positive integer.");
-            } else {
-                System.out.println("Invalid input. Please enter an integer.");
-                scanner.next();
-            }
         }
     }
 
@@ -166,52 +149,26 @@ public class CourseManagement {
         students.add(new Student("Hermione Granger", "002"));
         students.add(new Student("Ron Weasley", "003"));
         students.add(new Student("Draco Malfoy", "004"));
+
+        for (Course course : courses) {
+            for (Student student : students) {
+                student.enrollInCourse(course);
+            }
+        }
     }
 
     /**
      * Adds a new course to the system.
      */
     private static void addCourse() {
-        System.out.print("Enter course code: ");
-        String code = scanner.next();
-        System.out.print("Enter course name: ");
-        String name = scanner.next();
-        int capacity;
-        while (true) {
-            System.out.print("Enter max capacity: ");
-            if (scanner.hasNextInt()) {
-                capacity = scanner.nextInt();
-                if (capacity > 0)
-                    break;
-                else
-                    System.out.println("Capacity must be a positive integer.");
-            } else {
-                System.out.println("Invalid input. Please enter an integer.");
-                scanner.next();
-            }
-        }
-        Course course = new Course(code, name, capacity);
-        courses.add(course);
+        Course newCourse = Course.addNewCourse(scanner);
+        courses.add(newCourse);
         System.out.println("Course added successfully.");
     }
 
-    /**
-     * Adds a new student to the system.
-     */
     private static void addStudent() {
-        System.out.print("Enter student name: ");
-        String name = scanner.next();
-        String id;
-        while (true) {
-            System.out.print("Enter student ID: ");
-            id = scanner.next();
-            if (!id.trim().isEmpty() && findStudentById(id) == null)
-                break;
-            else
-                System.out.println("Invalid or duplicate ID. Please enter a unique ID.");
-        }
-        Student student = new Student(name, id);
-        students.add(student);
+        Student newStudent = Student.addNewStudent(scanner, students);
+        students.add(newStudent);
         System.out.println("Student added successfully.");
     }
 
@@ -228,13 +185,8 @@ public class CourseManagement {
         Course course = findCourseByCode(courseCode);
 
         if (student != null && course != null) {
-            if (course.canEnroll()) {
-                student.enrollInCourse(course);
-                course.incrementEnrolledStudents();
-                System.out.println("Student enrolled successfully.");
-            } else {
-                System.out.println("Course is full, cannot enroll any more students.");
-            }
+            String message = student.enrollInCourse(course);
+            System.out.println(message);
         } else {
             System.out.println("Invalid student ID or course code.");
         }
@@ -248,20 +200,8 @@ public class CourseManagement {
         String studentId = scanner.next();
         System.out.print("Enter course code: ");
         String courseCode = scanner.next();
-        float grade;
-        while (true) {
-            System.out.print("Enter grade (0.0-100.0): ");
-            if (scanner.hasNextFloat()) {
-                grade = scanner.nextFloat();
-                if (grade >= 0.0f && grade <= 100.0f)
-                    break;
-                else
-                    System.out.println("Grade must be between 0.0 and 100.0.");
-            } else {
-                System.out.println("Invalid input. Please enter a numeric value.");
-                scanner.next();
-            }
-        }
+
+        float grade = Utils.readFloatInRange(scanner, "Enter grade (0.0-100.0): ", 0.0f, 100.0f);
 
         Student student = findStudentById(studentId);
         Course course = findCourseByCode(courseCode);
