@@ -50,6 +50,17 @@ public class Course {
     }
 
     /**
+     * Edits the course's information.
+     *
+     * @param newName     the new name of the course
+     * @param newCapacity the new maximum capacity of the course
+     */
+    public void editCourseInfo(String newName, int newCapacity) {
+        this.name = newName;
+        this.maxCapacity = newCapacity;
+    }
+
+    /**
      * Gets the course code.
      *
      * @return the course code.

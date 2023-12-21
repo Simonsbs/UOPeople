@@ -68,6 +68,12 @@ public class CourseManagement {
                 case "7":
                     listAllCourses();
                     break;
+                case "8":
+                    editStudentInfo();
+                    break;
+                case "9":
+                    editCourseInfo();
+                    break;
                 case "E":
                     exit = true;
                     break;
@@ -89,11 +95,62 @@ public class CourseManagement {
         System.out.println("2. Add a new Hogwarts student");
         System.out.println("3. Enroll a student in a magic course");
         System.out.println("4. Set a grade for magical studies");
-        System.out.println("5. Calculate OWLs for a student");
+        System.out.println("5. View OWLs for a student");
         System.out.println("6. List all students");
         System.out.println("7. List all courses");
+        System.out.println("8. Edit a student's information");
+        System.out.println("9. Edit a course's information");
         System.out.println("E. Exit");
         System.out.print("Enter your choice: ");
+    }
+
+    private static void editStudentInfo() {
+        System.out.print("Enter student ID: ");
+        String studentId = scanner.next();
+        Student student = findStudentById(studentId);
+        if (student != null) {
+            System.out.print("Enter new student name: ");
+            String name = scanner.next();
+            System.out.print("Enter new student ID: ");
+            String newId = scanner.next();
+
+            student.editStudentInfo(name, newId);
+            System.out.println("Student information updated successfully.");
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    private static void editCourseInfo() {
+        System.out.print("Enter course code: ");
+        String courseCode = scanner.next();
+        Course course = findCourseByCode(courseCode);
+        if (course != null) {
+            System.out.print("Enter new course name: ");
+            String name = scanner.next();
+            int capacity = readPositiveInt("Enter new max capacity: ");
+            course.editCourseInfo(name, capacity);
+            System.out.println("Course information updated successfully.");
+        } else {
+            System.out.println("Invalid course code.");
+        }
+    }
+
+    private static int readPositiveInt(String prompt) {
+        int number;
+        while (true) {
+            System.out.print(prompt);
+            if (scanner.hasNextInt()) {
+                number = scanner.nextInt();
+                if (number > 0)
+                    return number;
+                else
+                    System.out.println("Value must be a positive integer.");
+            } else {
+                System.out.println("Invalid input. Please enter an integer.");
+                scanner.next();
+            }
+        }
     }
 
     /**
@@ -130,7 +187,7 @@ public class CourseManagement {
                     System.out.println("Capacity must be a positive integer.");
             } else {
                 System.out.println("Invalid input. Please enter an integer.");
-                scanner.next(); // Clear invalid input
+                scanner.next();
             }
         }
         Course course = new Course(code, name, capacity);
@@ -202,7 +259,7 @@ public class CourseManagement {
                     System.out.println("Grade must be between 0.0 and 100.0.");
             } else {
                 System.out.println("Invalid input. Please enter a numeric value.");
-                scanner.next(); // Clear invalid input
+                scanner.next();
             }
         }
 

@@ -59,6 +59,17 @@ public class Student {
     }
 
     /**
+     * Edits the student's information.
+     *
+     * @param newName the new name of the student
+     * @param newId   the new ID of the student
+     */
+    public void editStudentInfo(String newName, String newId) {
+        this.name = newName;
+        this.ID = newId;
+    }
+
+    /**
      * Gets the student's name.
      *
      * @return the name of the student
