@@ -52,6 +52,9 @@ public class MainSystem {
                 case "4":
                     listAllSpacecrafts();
                     break;
+                case "5":
+                    listAllSpacecraftsSimple();
+                    break;
                 case "E":
                     running = false;
                     break;
@@ -62,6 +65,27 @@ public class MainSystem {
 
         System.out.println("Thank you for using Simon's Spaceship Rental Emporium!");
         System.out.println("We hope to see you again soon!");
+    }
+
+    /**
+     * Method to list all spacecrafts (simple)
+     */
+    private static void listAllSpacecraftsSimple() {
+        System.out.println(FormatUtils.hr("=", " List of All Spacecrafts (Simple) "));
+
+        StringBuilder list = new StringBuilder();
+
+        for (Spacecraft spacecraft : spacecrafts) {
+            if (spacecraft instanceof Starfighter) {
+                list.append("Starfighter - " + spacecraft.getName() + "\n");
+            } else if (spacecraft instanceof Shuttle) {
+                list.append("Shuttle - " + spacecraft.getName() + "\n");
+            } else if (spacecraft instanceof CargoShip) {
+                list.append("CargoShip - " + spacecraft.getName() + "\n");
+            }
+        }
+
+        System.out.println(list.toString());
     }
 
     /**
@@ -143,7 +167,8 @@ public class MainSystem {
         System.out.println("1. Add Spacecraft");
         System.out.println("2. Edit Spacecraft");
         System.out.println("3. Delete Spacecraft");
-        System.out.println("4. List All Spacecrafts");
+        System.out.println("4. List All Spacecrafts (Detailed)");
+        System.out.println("5. List All Spacecrafts (Simple)");
         System.out.println("E. Exit");
         System.out.print("Enter your choice: ");
     }

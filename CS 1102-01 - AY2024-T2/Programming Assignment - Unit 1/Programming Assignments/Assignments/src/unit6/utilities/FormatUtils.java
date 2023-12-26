@@ -41,12 +41,15 @@ public class FormatUtils {
      * @return
      */
     public static String padString(String prefix, String postfix, int totalLength) {
-        int paddingLength = totalLength - prefix.length() - postfix.length() + 1;
-        if (paddingLength < 0) {
-            postfix = postfix.substring(0, Math.max(postfix.length() + paddingLength, 0));
-            paddingLength = 0;
+        int contentLength = prefix.length() + postfix.length();
+        if (contentLength <= totalLength) {
+            int paddingLength = totalLength - contentLength;
+            return prefix + String.format("%1$" + paddingLength + "s", "") + postfix;
+        } else {
+            int truncateLength = totalLength - prefix.length();
+            postfix = postfix.substring(0, Math.min(postfix.length(), truncateLength));
+            return prefix + postfix;
         }
-        return prefix + String.format("%1$" + paddingLength + "s", "") + postfix;
     }
 
     /**
