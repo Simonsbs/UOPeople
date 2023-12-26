@@ -1,6 +1,7 @@
 package unit6.models;
 
 import unit6.interfaces.ShuttleSpacecraft;
+import unit6.utilities.FormatUtils;
 
 public class Shuttle implements ShuttleSpacecraft {
     private String name;
@@ -76,12 +77,14 @@ public class Shuttle implements ShuttleSpacecraft {
     // toString method for displaying shuttle information
     @Override
     public String toString() {
-        return "Shuttle{" +
-                "name='" + name + '\'' +
-                ", model='" + model + '\'' +
-                ", engineType='" + engineType + '\'' +
-                ", crewCapacity=" + crewCapacity +
-                ", missionType='" + missionType + '\'' +
-                '}';
+        return "Shuttle:\n" +
+                "  +-------------------------+\n" +
+                "  | Name: " + FormatUtils.padRight(name, 18) + "|\n" +
+                "  | Model: " + FormatUtils.padRight(model, 18) + "|\n" +
+                "  | Engine Type: " + FormatUtils.padRight(engineType, 18) + "|\n" +
+                "  | Crew Capacity: " + FormatUtils.padRight(String.valueOf(crewCapacity), 18) + "|\n" +
+                "  | Mission Type: " + FormatUtils.padRight(missionType, 18) + "|\n" +
+                "  +-------------------------+";
     }
+
 }

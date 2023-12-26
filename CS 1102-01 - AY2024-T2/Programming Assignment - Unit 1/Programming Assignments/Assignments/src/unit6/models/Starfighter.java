@@ -1,6 +1,7 @@
 package unit6.models;
 
 import unit6.interfaces.StarfighterSpacecraft;
+import unit6.utilities.FormatUtils;
 
 public class Starfighter implements StarfighterSpacecraft {
     private String name;
@@ -77,12 +78,15 @@ public class Starfighter implements StarfighterSpacecraft {
     // toString method for displaying starfighter information
     @Override
     public String toString() {
-        return "Starfighter{" +
-                "name='" + name + '\'' +
-                ", model='" + model + '\'' +
-                ", engineType='" + engineType + '\'' +
-                ", weaponSystem='" + weaponSystem + '\'' +
-                ", hyperdriveCapability=" + hyperdriveCapability +
-                '}';
+        String hyperdriveStatus = hyperdriveCapability ? "Yes" : "No";
+        return "Starfighter:\n" +
+                "  +--------------------+\n" +
+                "  | Name: " + FormatUtils.padRight(name, 15) + "|\n" +
+                "  | Model: " + FormatUtils.padRight(model, 15) + "|\n" +
+                "  | Engine Type: " + FormatUtils.padRight(engineType, 15) + "|\n" +
+                "  | Weapon System: " + FormatUtils.padRight(weaponSystem, 15) + "|\n" +
+                "  | Hyperdrive: " + FormatUtils.padRight(hyperdriveStatus, 15) + "|\n" +
+                "  +--------------------+";
     }
+
 }

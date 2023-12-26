@@ -1,6 +1,7 @@
 package unit6.models;
 
 import unit6.interfaces.CargoShipSpacecraft;
+import unit6.utilities.FormatUtils;
 
 public class CargoShip implements CargoShipSpacecraft {
     private String name;
@@ -77,12 +78,14 @@ public class CargoShip implements CargoShipSpacecraft {
     // toString method for displaying cargo ship information
     @Override
     public String toString() {
-        return "CargoShip{" +
-                "name='" + name + '\'' +
-                ", model='" + model + '\'' +
-                ", engineType='" + engineType + '\'' +
-                ", cargoCapacity=" + cargoCapacity +
-                ", specializedCargoHandling=" + specializedCargoHandling +
-                '}';
+        String cargoHandlingStatus = specializedCargoHandling ? "Yes" : "No";
+        return "CargoShip:\n" +
+                "  +--------------------------------+\n" +
+                "  | Name: " + FormatUtils.padRight(name, 25) + "|\n" +
+                "  | Model: " + FormatUtils.padRight(model, 25) + "|\n" +
+                "  | Engine Type: " + FormatUtils.padRight(engineType, 25) + "|\n" +
+                "  | Cargo Capacity: " + FormatUtils.padRight(String.valueOf(cargoCapacity), 25) + "|\n" +
+                "  | Specialized Handling: " + FormatUtils.padRight(cargoHandlingStatus, 25) + "|\n" +
+                "  +--------------------------------+";
     }
 }
