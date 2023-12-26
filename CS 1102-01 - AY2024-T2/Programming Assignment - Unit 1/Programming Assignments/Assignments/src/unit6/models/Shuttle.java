@@ -15,8 +15,9 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
     }
 
     // Constructor with all fields
-    public Shuttle(String name, String model, String engineType, int crewCapacity, String missionType) {
-        super(name, model, engineType);
+    public Shuttle(String name, String model, String engineType, boolean isRentable, double rentalCostPerParsec,
+            int crewCapacity, String missionType) {
+        super(name, model, engineType, isRentable, rentalCostPerParsec);
         this.crewCapacity = crewCapacity;
         this.missionType = missionType;
     }

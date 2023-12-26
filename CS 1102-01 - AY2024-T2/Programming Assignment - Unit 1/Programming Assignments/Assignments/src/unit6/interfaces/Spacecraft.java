@@ -19,4 +19,12 @@ public interface Spacecraft {
 
     // Method to set the type of engine used by the spacecraft
     void setEngineType(String engineType);
+
+    boolean getIsRentable();
+
+    double getRentalCostPerParsec();
+
+    void setIsRentable(boolean isRentable);
+
+    void setRentalCostPerParsec(double rentalCostPerParsec);
 }

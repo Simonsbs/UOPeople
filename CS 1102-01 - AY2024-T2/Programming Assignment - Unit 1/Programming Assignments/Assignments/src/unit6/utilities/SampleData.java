@@ -9,61 +9,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SampleData {
-
-    // Sample Starfighters
-    public static Starfighter getSampleStarfighter1() {
-        return new Starfighter("X-Wing", "T-65", "Incom 4L4 Fusial Thrust Engine", "Laser Cannons", true);
+    private static double RandomDouble(double min, double max) {
+        return (Math.random() * (max - min)) + min;
     }
 
-    public static Starfighter getSampleStarfighter2() {
-        return new Starfighter("TIE Fighter", "Twin Ion Engine LN Starfighter", "Sienar Fleet Systems", "Laser Cannons",
-                false);
+    private static int RandomDouble() {
+        return (int) RandomDouble(50, 100);
     }
 
-    public static Starfighter getSampleStarfighter3() {
-        return new Starfighter("A-Wing", "RZ-1", "Alliance Underground Engineering", "Laser Cannons", true);
-    }
-
-    // Sample Shuttles
-    public static Shuttle getSampleShuttle1() {
-        return new Shuttle("Galaxy Class", "NCC-1701-D", "Warp Drive", 1014, "Exploration and Diplomacy");
-    }
-
-    public static Shuttle getSampleShuttle2() {
-        return new Shuttle("Imperial Shuttle", "Lambda-class T-4a", "Cygnus Spaceworks", 20, "Troop Transport");
-    }
-
-    public static Shuttle getSampleShuttle3() {
-        return new Shuttle("Runabout", "Danube Class", "Warp Drive", 40, "Short-range Missions");
-    }
-
-    // Sample Cargo Ships
-    public static CargoShip getSampleCargoShip1() {
-        return new CargoShip("Nostromo", "Lockmart CM-88B Bison M-Class Starfreighter",
-                "Rolls-Royce N66 Cyclone Thrust Tunnels", 20000, true);
-    }
-
-    public static CargoShip getSampleCargoShip2() {
-        return new CargoShip("Sulaco", "Conestoga-class Troop Transport", "Westingland A24", 50000, true);
-    }
-
-    public static CargoShip getSampleCargoShip3() {
-        return new CargoShip("Valley Forge", "American Airlines Space Freighter", "General Electric CF6-50", 100000,
-                false);
-    }
-
-    // Method to compile and return all samples
     public static List<Spacecraft> getAllSamples() {
         List<Spacecraft> allSamples = new ArrayList<>();
-        allSamples.add(getSampleStarfighter1());
-        allSamples.add(getSampleStarfighter2());
-        allSamples.add(getSampleStarfighter3());
-        allSamples.add(getSampleShuttle1());
-        allSamples.add(getSampleShuttle2());
-        allSamples.add(getSampleShuttle3());
-        allSamples.add(getSampleCargoShip1());
-        allSamples.add(getSampleCargoShip2());
-        allSamples.add(getSampleCargoShip3());
+        allSamples.add(new Starfighter("X-Wing", "T-65", "Incom 4L4 Fusial Thrust Engine", true, RandomDouble(),
+                "Laser Cannons", true));
+        allSamples.add(new Starfighter("TIE Fighter", "Twin Ion Engine LN Starfighter", "Sienar Fleet Systems", true,
+                RandomDouble(),
+                "Laser Cannons",
+                false));
+        allSamples.add(new Starfighter("A-Wing", "RZ-1", "Alliance Underground Engineering", true, RandomDouble(),
+                "Laser Cannons",
+                true));
+        allSamples.add(new Shuttle("Galaxy Class", "NCC-1701-D", "Warp Drive", true, RandomDouble(), 1014,
+                "Exploration and Diplomacy"));
+        allSamples
+                .add(new Shuttle("Imperial Shuttle", "Lambda-class T-4a", "Cygnus Spaceworks", true, RandomDouble(), 20,
+                        "Troop Transport"));
+        allSamples.add(new Shuttle("Runabout", "Danube Class", "Warp Drive", true, RandomDouble(), 40,
+                "Short-range Missions"));
+        allSamples.add(new CargoShip("Nostromo", "Lockmart CM-88B Bison M-Class Starfreighter",
+                "Rolls-Royce N66 Cyclone Thrust Tunnels", true, RandomDouble(), 20000, true));
+        allSamples
+                .add(new CargoShip("Sulaco", "Conestoga-class Troop Transport", "Westingland A24", true, RandomDouble(),
+                        50000, true));
+        allSamples
+                .add(new CargoShip("Valley Forge", "American Airlines Space Freighter", "General Electric CF6-50", true,
+                        RandomDouble(), 100000,
+                        false));
         return allSamples;
     }
 }

@@ -15,10 +15,11 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     }
 
     // Constructor with all fields
-    public CargoShip(String name, String model, String engineType, double cargoCapacity,
+    public CargoShip(String name, String model, String engineType, boolean isRentable, double rentalCostPerParsec,
+            double cargoCapacity,
             boolean specializedCargoHandling) {
 
-        super(name, model, engineType);
+        super(name, model, engineType, isRentable, rentalCostPerParsec);
         this.cargoCapacity = cargoCapacity;
         this.specializedCargoHandling = specializedCargoHandling;
     }
@@ -77,11 +78,12 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     // toString method for displaying cargo ship information
     @Override
     public String toString() {
-        String cargoHandlingStatus = specializedCargoHandling ? "Yes" : "No";
         return FormatUtils.hr("CargoShip") + "\n" +
                 super.toString() +
                 FormatUtils.padString("| Cargo Capacity: ", cargoCapacity + " |\n") +
-                FormatUtils.padString("| Specialized Handling: ", cargoHandlingStatus + " |\n") +
+                FormatUtils.padString("| Specialized Handling: ",
+                        InputValidators.convertBooleanToString(specializedCargoHandling) + " |\n")
+                +
                 FormatUtils.hr() + "\n";
     }
 }

@@ -15,9 +15,10 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
     }
 
     // Constructor with all fields
-    public Starfighter(String name, String model, String engineType, String weaponSystem,
+    public Starfighter(String name, String model, String engineType, boolean isRentable, double rentalCostPerParsec,
+            String weaponSystem,
             boolean hyperdriveCapability) {
-        super(name, model, engineType);
+        super(name, model, engineType, isRentable, rentalCostPerParsec);
         this.weaponSystem = weaponSystem;
         this.hyperdriveCapability = hyperdriveCapability;
     }

@@ -14,7 +14,4 @@ public interface CargoShipSpacecraft extends Spacecraft {
     // Method to set the presence of a specialized cargo handling system in the
     // cargo ship
     void setSpecializedCargoHandling(boolean specializedCargoHandling);
-
-    // Additional methods can be added to address other unique aspects of cargo
-    // ships
 }
