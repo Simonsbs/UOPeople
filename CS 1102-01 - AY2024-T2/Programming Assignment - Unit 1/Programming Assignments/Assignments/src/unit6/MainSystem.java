@@ -9,7 +9,6 @@ import unit6.utilities.InputValidators;
 import unit6.utilities.SampleData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,7 +16,7 @@ import java.util.Scanner;
  */
 public class MainSystem {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final List<Spacecraft> spacecrafts = new ArrayList<>();
+    private static final ArrayList<Spacecraft> spacecrafts = new ArrayList<>();
 
     /**
      * Main entry function for the program
