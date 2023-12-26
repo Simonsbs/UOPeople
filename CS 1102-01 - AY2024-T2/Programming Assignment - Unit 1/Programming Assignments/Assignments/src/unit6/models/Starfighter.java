@@ -6,15 +6,30 @@ import unit6.interfaces.StarfighterSpacecraft;
 import unit6.utilities.FormatUtils;
 import unit6.utilities.InputValidators;
 
+/**
+ * Class for a starfighter
+ */
 public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft {
     private String weaponSystem;
     private boolean hyperdriveCapability;
 
-    // Default constructor
+    /**
+     * Default constructor
+     */
     public Starfighter() {
     }
 
-    // Constructor with all fields
+    /**
+     * Constructor with all fields
+     * 
+     * @param name                 the name of the starfighter
+     * @param model                the model of the starfighter
+     * @param engineType           the type of engine used by the starfighter
+     * @param isRentable           the rentable status of the starfighter
+     * @param rentalCostPerParsec  the rental cost per parsec of the starfighter
+     * @param weaponSystem         the weapon system of the starfighter
+     * @param hyperdriveCapability the hyperdrive capability of the starfighter
+     */
     public Starfighter(String name, String model, String engineType, boolean isRentable, double rentalCostPerParsec,
             String weaponSystem,
             boolean hyperdriveCapability) {
@@ -23,7 +38,12 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
         this.hyperdriveCapability = hyperdriveCapability;
     }
 
-    // Function to create a new Starfighter object based on user input
+    /**
+     * Function to create a new Starfighter object based on user input
+     * 
+     * @param scanner the scanner to use for user input
+     * @return the created starfighter
+     */
     public static Starfighter createStarfighterFromInput(Scanner scanner) {
         System.out.println("Enter Starfighter details:");
 
@@ -36,7 +56,11 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
         return starfighter;
     }
 
-    // Function to edit an existing Starfighter object based on user input
+    /**
+     * Function to edit an existing Starfighter object based on user input
+     * 
+     * @param scanner the scanner to use for user input
+     */
     public void editFromInput(Scanner scanner) {
         System.out.println("Editing Starfighter details:");
 
@@ -54,27 +78,51 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
         }
     }
 
+    /**
+     * Method to get the weapon system of the starfighter
+     * 
+     * @return the weapon system of the starfighter
+     */
     @Override
     public String getWeaponSystem() {
         return weaponSystem;
     }
 
+    /**
+     * Method to set the weapon system of the starfighter
+     * 
+     * @param weaponSystem the weapon system of the starfighter
+     */
     @Override
     public void setWeaponSystem(String weaponSystem) {
         this.weaponSystem = weaponSystem;
     }
 
+    /**
+     * Method to get the hyperdrive capability of the starfighter
+     * 
+     * @return the hyperdrive capability of the starfighter
+     */
     @Override
     public boolean hasHyperdriveCapability() {
         return hyperdriveCapability;
     }
 
+    /**
+     * Method to set the hyperdrive capability of the starfighter
+     * 
+     * @param hyperdriveCapability the hyperdrive capability of the starfighter
+     */
     @Override
     public void setHyperdriveCapability(boolean hyperdriveCapability) {
         this.hyperdriveCapability = hyperdriveCapability;
     }
 
-    // toString method for displaying starfighter information
+    /**
+     * Method to get the details of the starfighter
+     * 
+     * @return the details of the starfighter
+     */
     @Override
     public String toString() {
         String hyperdriveStatus = hyperdriveCapability ? "Yes" : "No";

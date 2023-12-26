@@ -12,10 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class for the program
+ */
 public class MainSystem {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Spacecraft> spacecrafts = new ArrayList<>();
 
+    /**
+     * Main entry function for the program
+     * 
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         System.err.println(FormatUtils.hr());
         System.out.println(FormatUtils.centerString("Intergalactic Voyages: Simon's Starship Bazaar"));
@@ -25,7 +33,7 @@ public class MainSystem {
         System.err.println(FormatUtils.hr());
 
         // Load sample data
-        spacecrafts.addAll(SampleData.getAllSamples());
+        SampleData.getAllSamples(spacecrafts);
 
         boolean running = true;
         while (running) {
@@ -57,6 +65,12 @@ public class MainSystem {
         System.out.println("We hope to see you again soon!");
     }
 
+    /**
+     * Method to select a spacecraft from the list
+     * 
+     * @param actionTitle the title of the action to perform
+     * @return the selected spacecraft
+     */
     private static Spacecraft selectSpacecraft(String actionTitle) {
         System.out.println();
         System.out.println(FormatUtils.hr("=", " " + actionTitle + " "));
@@ -94,6 +108,9 @@ public class MainSystem {
         return spacecrafts.get(index);
     }
 
+    /**
+     * Method to delete a spacecraft
+     */
     private static void deleteSpacecraft() {
         Spacecraft spacecraft = selectSpacecraft("Delete");
         if (spacecraft != null) {
@@ -108,6 +125,9 @@ public class MainSystem {
         }
     }
 
+    /**
+     * Method to edit a spacecraft
+     */
     private static void editSpacecraft() {
         Spacecraft spacecraft = selectSpacecraft("Edit");
         if (spacecraft != null) {
@@ -115,6 +135,9 @@ public class MainSystem {
         }
     }
 
+    /**
+     * Method to display the main menu
+     */
     private static void displayMenu() {
         System.out.println();
         System.out.println(FormatUtils.hr("=", " Main Menu "));
@@ -126,6 +149,9 @@ public class MainSystem {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * Method to add a spacecraft
+     */
     private static void addSpacecraft() {
         System.out.println();
         System.out.println(FormatUtils.hr("=", " Select type to add "));
@@ -159,6 +185,9 @@ public class MainSystem {
         }
     }
 
+    /**
+     * Method to list all spacecrafts
+     */
     private static void listAllSpacecrafts() {
         System.out.println(FormatUtils.hr("=", " List of All Spacecrafts "));
         System.out.println();
@@ -191,5 +220,4 @@ public class MainSystem {
         System.out.println();
         System.out.println(hasCargoShips ? cargoShipsList.toString() : "Out of Stock");
     }
-
 }
