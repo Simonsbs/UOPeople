@@ -78,13 +78,10 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     @Override
     public String toString() {
         String cargoHandlingStatus = specializedCargoHandling ? "Yes" : "No";
-        return "CargoShip:\n" +
-                "  +--------------------------------+\n" +
-                "  | Name: " + FormatUtils.padRight(name, 25) + "|\n" +
-                "  | Model: " + FormatUtils.padRight(model, 25) + "|\n" +
-                "  | Engine Type: " + FormatUtils.padRight(engineType, 25) + "|\n" +
-                "  | Cargo Capacity: " + FormatUtils.padRight(String.valueOf(cargoCapacity), 25) + "|\n" +
-                "  | Specialized Handling: " + FormatUtils.padRight(cargoHandlingStatus, 25) + "|\n" +
-                "  +--------------------------------+";
+        return FormatUtils.hr("CargoShip") + "\n" +
+                super.toString() +
+                FormatUtils.padString("| Cargo Capacity: ", cargoCapacity + " |\n") +
+                FormatUtils.padString("| Specialized Handling: ", cargoHandlingStatus + " |\n") +
+                FormatUtils.hr() + "\n";
     }
 }

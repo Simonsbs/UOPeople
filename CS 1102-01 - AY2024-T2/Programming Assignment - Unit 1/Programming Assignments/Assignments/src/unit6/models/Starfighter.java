@@ -77,14 +77,11 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
     @Override
     public String toString() {
         String hyperdriveStatus = hyperdriveCapability ? "Yes" : "No";
-        return "Starfighter:\n" +
-                "  +--------------------+\n" +
-                "  | Name: " + FormatUtils.padRight(name, 15) + "|\n" +
-                "  | Model: " + FormatUtils.padRight(model, 15) + "|\n" +
-                "  | Engine Type: " + FormatUtils.padRight(engineType, 15) + "|\n" +
-                "  | Weapon System: " + FormatUtils.padRight(weaponSystem, 15) + "|\n" +
-                "  | Hyperdrive: " + FormatUtils.padRight(hyperdriveStatus, 15) + "|\n" +
-                "  +--------------------+";
+        return FormatUtils.hr("Starfighter") + "\n" +
+                super.toString() +
+                FormatUtils.padString("| Weapon System: ", weaponSystem + " |\n") +
+                FormatUtils.padString("| Hyperdrive: ", hyperdriveStatus + " |\n") +
+                FormatUtils.hr() + "\n";
     }
 
 }

@@ -4,6 +4,7 @@ import unit6.models.Starfighter;
 import unit6.models.Shuttle;
 import unit6.interfaces.Spacecraft;
 import unit6.models.CargoShip;
+import unit6.utilities.FormatUtils;
 import unit6.utilities.SampleData;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ public class MainSystem {
     private static final List<Spacecraft> spacecrafts = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.err.println("----------------------------------------------------");
-        System.out.println("|   Welcome to Simon's Spaceship Rental Emporium   |");
-        System.out.println("|  Explore the stars in your very own spacecraft!  |");
-        System.err.println("----------------------------------------------------");
+        System.err.println(FormatUtils.hr());
+        System.out.println(FormatUtils.centerString("Welcome to Simon's Spaceship Rental Emporium"));
+        System.out.println(FormatUtils.centerString("Explore the stars in your very own spacecraft!"));
+        System.err.println(FormatUtils.hr());
 
         // Load sample data
         spacecrafts.addAll(SampleData.getAllSamples());
@@ -54,7 +55,8 @@ public class MainSystem {
     }
 
     private static void displayMenu() {
-        System.out.println("\n===== Main Menu =====");
+        System.out.println();
+        System.out.println(FormatUtils.hr("=", " Main Menu "));
         System.out.println("1. Add Spacecraft");
         System.out.println("2. Edit Spacecraft");
         System.out.println("3. Delete Spacecraft");
@@ -68,7 +70,8 @@ public class MainSystem {
     }
 
     private static void listAllSpacecrafts() {
-        System.out.println("\n=== List of All Spacecrafts ===");
+        System.out.println(FormatUtils.hr("=", " List of All Spacecrafts "));
+        System.out.println();
 
         boolean hasStarfighters = false, hasShuttles = false, hasCargoShips = false;
         StringBuilder starfightersList = new StringBuilder();
@@ -78,22 +81,25 @@ public class MainSystem {
         for (Spacecraft spacecraft : spacecrafts) {
             if (spacecraft instanceof Starfighter) {
                 hasStarfighters = true;
-                starfightersList.append(spacecraft.toString()).append("\n");
+                starfightersList.append(spacecraft.toString());
             } else if (spacecraft instanceof Shuttle) {
                 hasShuttles = true;
-                shuttlesList.append(spacecraft.toString()).append("\n");
+                shuttlesList.append(spacecraft.toString());
             } else if (spacecraft instanceof CargoShip) {
                 hasCargoShips = true;
-                cargoShipsList.append(spacecraft.toString()).append("\n");
+                cargoShipsList.append(spacecraft.toString());
             }
         }
 
-        System.out.println("Starfighters:\n"
-                + (hasStarfighters ? starfightersList.toString() : "Out of Stock"));
-        System.out.println("Shuttles:\n"
-                + (hasShuttles ? shuttlesList.toString() : "Out of Stock"));
-        System.out.println("Cargo Ships:\n"
-                + (hasCargoShips ? cargoShipsList.toString() : "Out of Stock"));
+        System.out.println(FormatUtils.hr("=", " Starfighters "));
+        System.out.println();
+        System.out.println(hasStarfighters ? starfightersList.toString() : "Out of Stock");
+        System.out.println(FormatUtils.hr("=", " Shuttles "));
+        System.out.println();
+        System.out.println(hasShuttles ? shuttlesList.toString() : "Out of Stock");
+        System.out.println(FormatUtils.hr("=", " Cargo Ships "));
+        System.out.println();
+        System.out.println(hasCargoShips ? cargoShipsList.toString() : "Out of Stock");
     }
 
 }

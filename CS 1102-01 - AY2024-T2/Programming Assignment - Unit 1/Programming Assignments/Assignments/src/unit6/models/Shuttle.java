@@ -70,12 +70,11 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
     // toString method for displaying shuttle information
     @Override
     public String toString() {
-        return "Shuttle:\n" +
-                "  +-------------------------+\n" +
+        return FormatUtils.hr("Shuttle") + "\n" +
                 super.toString() +
-                "  | Crew Capacity: " + FormatUtils.padRight(String.valueOf(crewCapacity), 18) + "|\n" +
-                "  | Mission Type: " + FormatUtils.padRight(missionType, 18) + "|\n" +
-                "  +-------------------------+";
+                FormatUtils.padString("| Crew Capacity: ", crewCapacity + " |\n") +
+                FormatUtils.padString("| Mission Type: ", missionType + " |\n") +
+                FormatUtils.hr() + "\n";
     }
 
 }

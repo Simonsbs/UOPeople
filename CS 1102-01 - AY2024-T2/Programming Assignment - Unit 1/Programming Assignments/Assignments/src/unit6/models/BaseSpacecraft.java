@@ -72,10 +72,11 @@ public abstract class BaseSpacecraft {
         this.engineType = engineType;
     }
 
-    // Common toString functionality
-    protected String getBaseToString() {
-        return "  | Name: " + FormatUtils.padRight(name, 15) + "|\n" +
-                "  | Model: " + FormatUtils.padRight(model, 15) + "|\n" +
-                "  | Engine Type: " + FormatUtils.padRight(engineType, 15) + "|\n";
+    @Override
+    public String toString() {
+        return FormatUtils.padString("| Name: ", name + " |\n") +
+                FormatUtils.padString("| Model: ", model + " |\n") +
+                FormatUtils.padString("| Engine Type: ", engineType + " |\n");
     }
+
 }
