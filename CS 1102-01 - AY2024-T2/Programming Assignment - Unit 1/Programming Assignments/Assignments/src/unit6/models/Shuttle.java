@@ -38,6 +38,15 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
     }
 
     /**
+     * Function to get the type name of the shuttle
+     * 
+     * @return the type name of the shuttle
+     */
+    public String getTypeName() {
+        return "Shuttle";
+    }
+
+    /**
      * Function to create a new Shuttle object based on user input
      * 
      * @param scanner the scanner to use for user input

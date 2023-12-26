@@ -76,13 +76,7 @@ public class MainSystem {
         StringBuilder list = new StringBuilder();
 
         for (Spacecraft spacecraft : spacecrafts) {
-            if (spacecraft instanceof Starfighter) {
-                list.append("Starfighter - " + spacecraft.getName() + "\n");
-            } else if (spacecraft instanceof Shuttle) {
-                list.append("Shuttle - " + spacecraft.getName() + "\n");
-            } else if (spacecraft instanceof CargoShip) {
-                list.append("CargoShip - " + spacecraft.getName() + "\n");
-            }
+            list.append(spacecraft.getTypeName() + " - " + spacecraft.getName() + "\n");
         }
 
         System.out.println(list.toString());
@@ -137,13 +131,15 @@ public class MainSystem {
     private static void deleteSpacecraft() {
         Spacecraft spacecraft = selectSpacecraft("Delete");
         if (spacecraft != null) {
+            String type = spacecraft.getTypeName();
             System.out
-                    .println("Are you sure you want to delete the spacecraft '" + spacecraft.getName() + "'? (yes/no)");
+                    .println("Are you sure you want to delete the " + type + " '"
+                            + spacecraft.getName() + "'? (yes/no)");
             if (InputValidators.getYesNoInput(scanner, "")) {
                 spacecrafts.remove(spacecraft);
-                System.out.println("Spacecraft deleted successfully!");
+                System.out.println(type + " deleted successfully!");
             } else {
-                System.out.println("Spacecraft deletion aborted.");
+                System.out.println(type + " deletion aborted.");
             }
         }
     }

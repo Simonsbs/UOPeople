@@ -39,6 +39,15 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
     }
 
     /**
+     * Function to get the type name of the starfighter
+     * 
+     * @return the type name of the starfighter
+     */
+    public String getTypeName() {
+        return "Starfighter";
+    }
+
+    /**
      * Function to create a new Starfighter object based on user input
      * 
      * @param scanner the scanner to use for user input

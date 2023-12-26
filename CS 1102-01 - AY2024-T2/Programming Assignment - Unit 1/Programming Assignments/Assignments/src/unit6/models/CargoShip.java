@@ -41,6 +41,15 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     }
 
     /**
+     * Function to get the type name of the cargo ship
+     * 
+     * @return the type name of the cargo ship
+     */
+    public String getTypeName() {
+        return "CargoShip";
+    }
+
+    /**
      * Function to create a new CargoShip object based on user input
      * 
      * @param scanner the scanner to use for user input

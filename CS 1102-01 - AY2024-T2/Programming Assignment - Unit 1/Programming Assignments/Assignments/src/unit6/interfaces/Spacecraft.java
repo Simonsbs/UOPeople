@@ -83,4 +83,11 @@ public interface Spacecraft {
      * @param scanner the scanner to use for user input
      */
     void editFromInput(Scanner scanner);
+
+    /**
+     * Method to get the type name of the spacecraft
+     * 
+     * @return the type name of the spacecraft
+     */
+    String getTypeName();
 }
