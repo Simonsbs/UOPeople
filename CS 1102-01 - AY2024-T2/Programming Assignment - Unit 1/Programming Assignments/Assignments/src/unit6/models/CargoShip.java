@@ -1,12 +1,12 @@
 package unit6.models;
 
+import java.util.Scanner;
+
 import unit6.interfaces.CargoShipSpacecraft;
 import unit6.utilities.FormatUtils;
+import unit6.utilities.InputValidators;
 
-public class CargoShip implements CargoShipSpacecraft {
-    private String name;
-    private String model;
-    private String engineType;
+public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     private double cargoCapacity;
     private boolean specializedCargoHandling;
 
@@ -17,42 +17,41 @@ public class CargoShip implements CargoShipSpacecraft {
     // Constructor with all fields
     public CargoShip(String name, String model, String engineType, double cargoCapacity,
             boolean specializedCargoHandling) {
-        this.name = name;
-        this.model = model;
-        this.engineType = engineType;
+
+        super(name, model, engineType);
         this.cargoCapacity = cargoCapacity;
         this.specializedCargoHandling = specializedCargoHandling;
     }
 
-    // Implement all interface methods
-    @Override
-    public String getName() {
-        return name;
+    // Function to create a new CargoShip object based on user input
+    public static CargoShip createCargoShipFromInput(Scanner scanner) {
+        System.out.println("Enter CargoShip details:");
+
+        CargoShip cargoShip = (CargoShip) BaseSpacecraft.createBaseSpacecraftFromInput(scanner, new Shuttle());
+        cargoShip.cargoCapacity = InputValidators.getDoubleInput(scanner, "Cargo Capacity: ");
+        cargoShip.specializedCargoHandling = InputValidators.getYesNoInput(scanner,
+                "Specialized Cargo Handling (yes/no): ");
+
+        return cargoShip;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+    // Function to edit an existing CargoShip object based on user input
+    public void editCargoShipFromInput(Scanner scanner) {
+        System.out.println("Editing CargoShip details:");
 
-    @Override
-    public String getModel() {
-        return model;
-    }
+        super.editBaseSpacecraftFromInput(scanner);
 
-    @Override
-    public void setModel(String model) {
-        this.model = model;
-    }
+        String cargoCapacityStr = InputValidators.getInput(scanner,
+                "New Cargo Capacity (leave blank to keep current): ");
+        if (!cargoCapacityStr.isEmpty() && InputValidators.isValidDouble(cargoCapacityStr)) {
+            setCargoCapacity(Double.parseDouble(cargoCapacityStr));
+        }
 
-    @Override
-    public String getEngineType() {
-        return engineType;
-    }
-
-    @Override
-    public void setEngineType(String engineType) {
-        this.engineType = engineType;
+        String specializedHandlingStr = InputValidators.getInput(scanner,
+                "New Specialized Cargo Handling (yes/no, leave blank to keep current): ");
+        if (!specializedHandlingStr.isEmpty()) {
+            setSpecializedCargoHandling(InputValidators.convertYesNoToBoolean(specializedHandlingStr));
+        }
     }
 
     @Override

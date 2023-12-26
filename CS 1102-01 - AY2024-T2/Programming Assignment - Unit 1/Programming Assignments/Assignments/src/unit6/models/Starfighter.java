@@ -1,12 +1,12 @@
 package unit6.models;
 
+import java.util.Scanner;
+
 import unit6.interfaces.StarfighterSpacecraft;
 import unit6.utilities.FormatUtils;
+import unit6.utilities.InputValidators;
 
-public class Starfighter implements StarfighterSpacecraft {
-    private String name;
-    private String model;
-    private String engineType;
+public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft {
     private String weaponSystem;
     private boolean hyperdriveCapability;
 
@@ -17,42 +17,40 @@ public class Starfighter implements StarfighterSpacecraft {
     // Constructor with all fields
     public Starfighter(String name, String model, String engineType, String weaponSystem,
             boolean hyperdriveCapability) {
-        this.name = name;
-        this.model = model;
-        this.engineType = engineType;
+        super(name, model, engineType);
         this.weaponSystem = weaponSystem;
         this.hyperdriveCapability = hyperdriveCapability;
     }
 
-    // Implement all interface methods
-    @Override
-    public String getName() {
-        return name;
+    // Function to create a new Starfighter object based on user input
+    public static Starfighter createStarfighterFromInput(Scanner scanner) {
+        System.out.println("Enter Starfighter details:");
+
+        Starfighter starfighter = (Starfighter) BaseSpacecraft.createBaseSpacecraftFromInput(scanner,
+                new Starfighter());
+
+        starfighter.weaponSystem = InputValidators.getInput(scanner, "Weapon System: ");
+        starfighter.hyperdriveCapability = InputValidators.getYesNoInput(scanner, "Hyperdrive Capability (yes/no): ");
+
+        return starfighter;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+    // Function to edit an existing Starfighter object based on user input
+    public void editStarfighterFromInput(Scanner scanner) {
+        System.out.println("Editing Starfighter details:");
 
-    @Override
-    public String getModel() {
-        return model;
-    }
+        super.editBaseSpacecraftFromInput(scanner);
 
-    @Override
-    public void setModel(String model) {
-        this.model = model;
-    }
+        String weaponSystem = InputValidators.getInput(scanner, "New Weapon System (leave blank to keep current): ");
+        if (!weaponSystem.isEmpty()) {
+            setWeaponSystem(weaponSystem);
+        }
 
-    @Override
-    public String getEngineType() {
-        return engineType;
-    }
-
-    @Override
-    public void setEngineType(String engineType) {
-        this.engineType = engineType;
+        String hyperdriveCapabilityStr = InputValidators.getInput(scanner,
+                "New Hyperdrive Capability (yes/no, leave blank to keep current): ");
+        if (!hyperdriveCapabilityStr.isEmpty()) {
+            setHyperdriveCapability(InputValidators.convertYesNoToBoolean(hyperdriveCapabilityStr));
+        }
     }
 
     @Override
