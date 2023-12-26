@@ -30,7 +30,7 @@ public class InputValidators {
     public static boolean getYesNoInput(Scanner scanner, String prompt) {
         String input = getInput(scanner, prompt);
         while (!isValidYesNoResponse(input) && !input.isEmpty()) {
-            System.out.println(DEF_ERROR_PREFIX + "(y)es | (n)o:");
+            System.out.println(DEF_ERROR_PREFIX + "(y)es/(n)o:");
             input = getInput(scanner, prompt);
         }
         return input.equalsIgnoreCase("yes") || input.toLowerCase().startsWith("y");
@@ -39,12 +39,12 @@ public class InputValidators {
     public static boolean isValidYesNoResponse(String input) {
         return input.equalsIgnoreCase("yes") ||
                 input.equalsIgnoreCase("no") ||
-                input.toLowerCase().startsWith("y") ||
-                input.toLowerCase().startsWith("n");
+                input.equalsIgnoreCase("y") ||
+                input.equalsIgnoreCase("n");
     }
 
     public static boolean convertYesNoToBoolean(String input) {
-        return input.equalsIgnoreCase("yes");
+        return input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y");
     }
 
     public static String convertBooleanToString(boolean input, String trueString, String falseString) {

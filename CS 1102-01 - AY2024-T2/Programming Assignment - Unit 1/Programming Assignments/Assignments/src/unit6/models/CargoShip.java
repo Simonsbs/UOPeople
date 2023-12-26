@@ -28,7 +28,7 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     public static CargoShip createCargoShipFromInput(Scanner scanner) {
         System.out.println("Enter CargoShip details:");
 
-        CargoShip cargoShip = (CargoShip) BaseSpacecraft.createBaseSpacecraftFromInput(scanner, new Shuttle());
+        CargoShip cargoShip = (CargoShip) BaseSpacecraft.createBaseSpacecraftFromInput(scanner, new CargoShip());
         cargoShip.cargoCapacity = InputValidators.getDoubleInput(scanner, "Cargo Capacity: ");
         cargoShip.specializedCargoHandling = InputValidators.getYesNoInput(scanner,
                 "Specialized Cargo Handling (yes/no): ");
