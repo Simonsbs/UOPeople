@@ -6,7 +6,6 @@ import unit6.interfaces.Spacecraft;
 import unit6.models.CargoShip;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Utility class to generate sample data
@@ -38,7 +37,7 @@ public class SampleData {
      * 
      * @return a list of all sample spacecrafts
      */
-    public static void getAllSamples(List<Spacecraft> list) {
+    public static void getAllSamples(ArrayList<Spacecraft> list) {
         list.add(new Starfighter("X-Wing", "T-65", "Incom 4L4 Fusial Thrust Engine", true, RandomDouble(),
                 "Laser Cannons", true));
         list.add(new Starfighter("TIE Fighter", "Twin Ion Engine LN Starfighter", "Sienar Fleet Systems", true,
