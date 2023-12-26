@@ -1,5 +1,7 @@
 package unit6.interfaces;
 
+import java.util.Scanner;
+
 public interface Spacecraft {
 
     // Method to get the name of the spacecraft
@@ -27,4 +29,6 @@ public interface Spacecraft {
     void setIsRentable(boolean isRentable);
 
     void setRentalCostPerParsec(double rentalCostPerParsec);
+
+    void editFromInput(Scanner scanner);
 }

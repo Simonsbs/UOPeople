@@ -5,6 +5,7 @@ import unit6.models.Shuttle;
 import unit6.interfaces.Spacecraft;
 import unit6.models.CargoShip;
 import unit6.utilities.FormatUtils;
+import unit6.utilities.InputValidators;
 import unit6.utilities.SampleData;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class MainSystem {
                     editSpacecraft();
                     break;
                 case "3":
-                    // deleteSpacecraft(); // Method to be implemented
+                    deleteSpacecraft();
                     break;
                 case "4":
                     listAllSpacecrafts();
@@ -56,16 +57,16 @@ public class MainSystem {
         System.out.println("We hope to see you again soon!");
     }
 
-    private static void editSpacecraft() {
+    private static Spacecraft selectSpacecraft(String actionTitle) {
         System.out.println();
-        System.out.println(FormatUtils.hr("=", " Edit Spacecraft "));
+        System.out.println(FormatUtils.hr("=", " " + actionTitle + " "));
 
         if (spacecrafts.isEmpty()) {
-            System.out.println("No spacecrafts to edit.");
-            return;
+            System.out.println("No spacecrafts available.");
+            return null;
         }
 
-        System.out.println("Select a spacecraft to edit:");
+        System.out.println("Select a spacecraft to " + actionTitle.toLowerCase() + ":");
         for (int i = 0; i < spacecrafts.size(); i++) {
             System.out.println((i + 1) + ". " + spacecrafts.get(i).getName());
         }
@@ -74,22 +75,43 @@ public class MainSystem {
         String choice = scanner.nextLine().toUpperCase();
 
         if (choice.equals("B")) {
-            return;
+            return null;
         }
 
-        int index = Integer.parseInt(choice) - 1;
+        int index;
+        try {
+            index = Integer.parseInt(choice) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid option. Please try again.");
+            return null;
+        }
+
         if (index < 0 || index >= spacecrafts.size()) {
             System.out.println("Invalid option. Please try again.");
-            return;
+            return null;
         }
 
-        Spacecraft spacecraft = spacecrafts.get(index);
-        if (spacecraft instanceof Starfighter) {
-            ((Starfighter) spacecraft).editStarfighterFromInput(scanner);
-        } else if (spacecraft instanceof Shuttle) {
-            ((Shuttle) spacecraft).editShuttleFromInput(scanner);
-        } else if (spacecraft instanceof CargoShip) {
-            ((CargoShip) spacecraft).editCargoShipFromInput(scanner);
+        return spacecrafts.get(index);
+    }
+
+    private static void deleteSpacecraft() {
+        Spacecraft spacecraft = selectSpacecraft("Delete");
+        if (spacecraft != null) {
+            System.out
+                    .println("Are you sure you want to delete the spacecraft '" + spacecraft.getName() + "'? (yes/no)");
+            if (InputValidators.getYesNoInput(scanner, "")) {
+                spacecrafts.remove(spacecraft);
+                System.out.println("Spacecraft deleted successfully!");
+            } else {
+                System.out.println("Spacecraft deletion aborted.");
+            }
+        }
+    }
+
+    private static void editSpacecraft() {
+        Spacecraft spacecraft = selectSpacecraft("Edit");
+        if (spacecraft != null) {
+            spacecraft.editFromInput(scanner);
         }
     }
 

@@ -37,7 +37,7 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
     }
 
     // Function to edit an existing Starfighter object based on user input
-    public void editStarfighterFromInput(Scanner scanner) {
+    public void editFromInput(Scanner scanner) {
         System.out.println("Editing Starfighter details:");
 
         super.editBaseSpacecraftFromInput(scanner);

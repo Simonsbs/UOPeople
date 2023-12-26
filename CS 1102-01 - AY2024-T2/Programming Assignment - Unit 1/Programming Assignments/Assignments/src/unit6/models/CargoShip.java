@@ -37,7 +37,7 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
     }
 
     // Function to edit an existing CargoShip object based on user input
-    public void editCargoShipFromInput(Scanner scanner) {
+    public void editFromInput(Scanner scanner) {
         System.out.println("Editing CargoShip details:");
 
         super.editBaseSpacecraftFromInput(scanner);

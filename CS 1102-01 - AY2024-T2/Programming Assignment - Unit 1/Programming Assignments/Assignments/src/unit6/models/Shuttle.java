@@ -32,7 +32,7 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
     }
 
     // Function to edit an existing Shuttle object based on user input
-    public void editShuttleFromInput(Scanner scanner) {
+    public void editFromInput(Scanner scanner) {
         System.out.println("Editing Shuttle details:");
 
         super.editBaseSpacecraftFromInput(scanner);
