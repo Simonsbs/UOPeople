@@ -63,8 +63,9 @@ public class MainSystem {
             }
         }
 
-        System.out.println("Thank you for using Simon's Spaceship Rental Emporium!");
-        System.out.println("We hope to see you again soon!");
+        System.out.println("Thank you for using Simon's Starship Bazaar!");
+        System.out.println("Goodbye. Live long and prosper. NO REFUNDS.");
+
     }
 
     /**
