@@ -53,7 +53,7 @@ public abstract class BaseSpacecraft {
             this.engineType = engineType;
         }
 
-        String isRentableStr = InputValidators.getEditInput(scanner, "Is Rentable (yes/no)");
+        String isRentableStr = InputValidators.getEditInput(scanner, "Is Rentable (y)es/(n)o");
         if (!isRentableStr.isEmpty()) {
             this.isRentable = InputValidators.convertYesNoToBoolean(isRentableStr);
         }

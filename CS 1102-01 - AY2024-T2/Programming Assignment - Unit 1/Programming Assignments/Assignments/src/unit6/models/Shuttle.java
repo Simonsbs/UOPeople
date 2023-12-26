@@ -37,12 +37,12 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
 
         super.editBaseSpacecraftFromInput(scanner);
 
-        String crewCapacityStr = InputValidators.getInput(scanner, "New Crew Capacity (leave blank to keep current): ");
+        String crewCapacityStr = InputValidators.getEditInput(scanner, "Crew Capacity");
         if (!crewCapacityStr.isEmpty() && InputValidators.isValidInteger(crewCapacityStr)) {
             this.crewCapacity = Integer.parseInt(crewCapacityStr);
         }
 
-        String missionType = InputValidators.getInput(scanner, "New Mission Type (leave blank to keep current): ");
+        String missionType = InputValidators.getEditInput(scanner, "Mission Type");
         if (!missionType.isEmpty()) {
             this.missionType = missionType;
         }

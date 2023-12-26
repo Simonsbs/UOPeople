@@ -29,11 +29,18 @@ public class InputValidators {
 
     public static boolean getYesNoInput(Scanner scanner, String prompt) {
         String input = getInput(scanner, prompt);
-        while (!input.equalsIgnoreCase("yes") && !input.equalsIgnoreCase("no") && !input.isEmpty()) {
-            System.out.println(DEF_ERROR_PREFIX + "'yes' or 'no':");
+        while (!isValidYesNoResponse(input) && !input.isEmpty()) {
+            System.out.println(DEF_ERROR_PREFIX + "(y)es | (n)o:");
             input = getInput(scanner, prompt);
         }
-        return input.equalsIgnoreCase("yes");
+        return input.equalsIgnoreCase("yes") || input.toLowerCase().startsWith("y");
+    }
+
+    public static boolean isValidYesNoResponse(String input) {
+        return input.equalsIgnoreCase("yes") ||
+                input.equalsIgnoreCase("no") ||
+                input.toLowerCase().startsWith("y") ||
+                input.toLowerCase().startsWith("n");
     }
 
     public static boolean convertYesNoToBoolean(String input) {
@@ -78,7 +85,6 @@ public class InputValidators {
         return input;
     }
 
-    // Helper method to get validated integer input
     public static int getIntInput(Scanner scanner, String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine();

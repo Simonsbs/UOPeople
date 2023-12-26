@@ -42,13 +42,13 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
 
         super.editBaseSpacecraftFromInput(scanner);
 
-        String weaponSystem = InputValidators.getInput(scanner, "New Weapon System (leave blank to keep current): ");
+        String weaponSystem = InputValidators.getEditInput(scanner, "Weapon System");
         if (!weaponSystem.isEmpty()) {
             setWeaponSystem(weaponSystem);
         }
 
-        String hyperdriveCapabilityStr = InputValidators.getInput(scanner,
-                "New Hyperdrive Capability (yes/no, leave blank to keep current): ");
+        String hyperdriveCapabilityStr = InputValidators.getEditInput(scanner,
+                "Hyperdrive Capability yes/no");
         if (!hyperdriveCapabilityStr.isEmpty()) {
             setHyperdriveCapability(InputValidators.convertYesNoToBoolean(hyperdriveCapabilityStr));
         }

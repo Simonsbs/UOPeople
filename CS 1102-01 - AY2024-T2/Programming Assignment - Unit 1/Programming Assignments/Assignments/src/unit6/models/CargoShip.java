@@ -42,14 +42,12 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
 
         super.editBaseSpacecraftFromInput(scanner);
 
-        String cargoCapacityStr = InputValidators.getInput(scanner,
-                "New Cargo Capacity (leave blank to keep current): ");
+        String cargoCapacityStr = InputValidators.getEditInput(scanner, "Cargo Capacity");
         if (!cargoCapacityStr.isEmpty() && InputValidators.isValidDouble(cargoCapacityStr)) {
             setCargoCapacity(Double.parseDouble(cargoCapacityStr));
         }
 
-        String specializedHandlingStr = InputValidators.getInput(scanner,
-                "New Specialized Cargo Handling (yes/no, leave blank to keep current): ");
+        String specializedHandlingStr = InputValidators.getEditInput(scanner, "Specialized Cargo Handling yes/no");
         if (!specializedHandlingStr.isEmpty()) {
             setSpecializedCargoHandling(InputValidators.convertYesNoToBoolean(specializedHandlingStr));
         }
