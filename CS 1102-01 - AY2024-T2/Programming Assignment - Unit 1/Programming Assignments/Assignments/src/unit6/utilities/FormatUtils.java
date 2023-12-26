@@ -4,7 +4,6 @@ package unit6.utilities;
  * Utility class for formatting strings
  */
 public class FormatUtils {
-    // Default values
     private static final int DEF_LENGTH = 60;
     private static final String DEF_HR_CHAR = "-";
     private static final String DEF_END_CHAR = "|";
