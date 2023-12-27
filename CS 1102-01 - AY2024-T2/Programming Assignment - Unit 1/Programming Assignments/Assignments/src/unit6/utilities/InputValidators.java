@@ -15,7 +15,7 @@ public class InputValidators {
      * @return true if the string is valid, false otherwise
      */
     public static boolean isValidString(String input) {
-        return input != null && !input.trim().isEmpty();
+        return input != null && !input.isEmpty() && !input.trim().isEmpty();
     }
 
     /**
@@ -157,7 +157,7 @@ public class InputValidators {
     public static String getInput(Scanner scanner, String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine();
-        while (!isValidString(input) && !input.isEmpty()) {
+        while (!isValidString(input)) {
             System.out.println(DEF_ERROR_PREFIX + "a valid string:");
             System.out.print(prompt);
             input = scanner.nextLine();

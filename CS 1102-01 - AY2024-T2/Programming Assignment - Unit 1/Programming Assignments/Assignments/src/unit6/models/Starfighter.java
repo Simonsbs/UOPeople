@@ -54,7 +54,7 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
      * @return the created starfighter
      */
     public static Starfighter createStarfighterFromInput(Scanner scanner) {
-        System.out.println("Enter Starfighter details:");
+        System.out.println(FormatUtils.hr("=", " Enter Starfighter details "));
 
         Starfighter starfighter = (Starfighter) BaseSpacecraft.createBaseSpacecraftFromInput(scanner,
                 new Starfighter());
@@ -71,7 +71,7 @@ public class Starfighter extends BaseSpacecraft implements StarfighterSpacecraft
      * @param scanner the scanner to use for user input
      */
     public void editFromInput(Scanner scanner) {
-        System.out.println("Editing Starfighter details:");
+        System.out.println(FormatUtils.hr("=", " Edit Starfighter details "));
 
         super.editBaseSpacecraftFromInput(scanner);
 

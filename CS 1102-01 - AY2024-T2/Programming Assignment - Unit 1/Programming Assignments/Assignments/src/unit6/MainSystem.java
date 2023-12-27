@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Main class for the program
+ * Main class for the program to manage spacecraft rentals
  */
 public class MainSystem {
     private static final Scanner scanner = new Scanner(System.in);

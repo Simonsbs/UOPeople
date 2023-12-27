@@ -56,7 +56,7 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
      * @return the created cargo ship
      */
     public static CargoShip createCargoShipFromInput(Scanner scanner) {
-        System.out.println("Enter CargoShip details:");
+        System.out.println(FormatUtils.hr("=", " Enter CargoShip details "));
 
         CargoShip cargoShip = (CargoShip) BaseSpacecraft.createBaseSpacecraftFromInput(scanner, new CargoShip());
         cargoShip.cargoCapacity = InputValidators.getDoubleInput(scanner, "Cargo Capacity: ");
@@ -72,7 +72,7 @@ public class CargoShip extends BaseSpacecraft implements CargoShipSpacecraft {
      * @param scanner the scanner to use for user input
      */
     public void editFromInput(Scanner scanner) {
-        System.out.println("Editing CargoShip details:");
+        System.out.println(FormatUtils.hr("=", " Edit CargoShip details "));
 
         super.editBaseSpacecraftFromInput(scanner);
 

@@ -53,7 +53,7 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
      * @return the created shuttle
      */
     public static Shuttle createShuttleFromInput(Scanner scanner) {
-        System.out.println("Enter Shuttle details:");
+        System.out.println(FormatUtils.hr("=", " Enter Shuttle details "));
 
         Shuttle shuttle = (Shuttle) BaseSpacecraft.createBaseSpacecraftFromInput(scanner, new Shuttle());
         shuttle.crewCapacity = InputValidators.getIntInput(scanner, "Crew Capacity: ");
@@ -67,7 +67,7 @@ public class Shuttle extends BaseSpacecraft implements ShuttleSpacecraft {
      * @param scanner the scanner to use for user input
      */
     public void editFromInput(Scanner scanner) {
-        System.out.println("Editing Shuttle details:");
+        System.out.println(FormatUtils.hr("=", " Edit Shuttle details "));
 
         super.editBaseSpacecraftFromInput(scanner);
 
