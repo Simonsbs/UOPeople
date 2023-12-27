@@ -100,7 +100,8 @@ public class MainSystem {
 
         System.out.println("Select a spacecraft to " + actionTitle.toLowerCase() + ":");
         for (int i = 0; i < spacecrafts.size(); i++) {
-            System.out.println((i + 1) + ". " + spacecrafts.get(i).getName());
+            Spacecraft spacecraft = spacecrafts.get(i);
+            System.out.println((i + 1) + ". " + spacecraft.getName() + " (" + spacecraft.getTypeName() + ")");
         }
         System.out.println("B. Back to Main Menu");
         System.out.print("Enter your choice: ");
@@ -133,9 +134,8 @@ public class MainSystem {
         Spacecraft spacecraft = selectSpacecraft("Delete");
         if (spacecraft != null) {
             String type = spacecraft.getTypeName();
-            System.out
-                    .println("Are you sure you want to delete the " + type + " '"
-                            + spacecraft.getName() + "'? (yes/no)");
+            System.out.println("Are you sure you want to delete the " + type + " '"
+                    + spacecraft.getName() + "'? (yes/no)");
             if (InputValidators.getYesNoInput(scanner, "")) {
                 spacecrafts.remove(spacecraft);
                 System.out.println(type + " deleted successfully!");
