@@ -4,22 +4,14 @@ import com.ecommerce.orders.Order;
 
 public class Main {
     public static void main(String[] args) {
-        // Create instances of products
-        Product product1 = new Product(/* parameters */);
-        Product product2 = new Product(/* parameters */);
+        Product book = new Product("B001", "Java Programming", 59.99);
+        Product laptop = new Product("L001", "High-end Laptop", 1200.00);
 
-        // Create an instance of a customer
-        Customer customer = new Customer(/* parameters */);
+        Customer customer = new Customer("C100", "Alice");
+        customer.getShoppingCart().addProduct(book);
+        customer.getShoppingCart().addProduct(laptop);
 
-        // Customer browses and adds products to their shopping cart
-        // customer.getShoppingCart().addProduct(product1);
-        // customer.getShoppingCart().addProduct(product2);
-
-        // Customer places an order
-        Order order = new Order(/* parameters using customer and their shopping cart */);
-
-        // Display information
-        System.out.println("Order Summary:");
-        System.out.println(order); // Assuming toString() method is overridden in Order class
+        Order order = new Order("O500", customer);
+        System.out.println(order);
     }
 }
