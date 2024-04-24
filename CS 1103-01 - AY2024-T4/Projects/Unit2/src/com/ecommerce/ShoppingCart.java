@@ -12,20 +12,20 @@ public class ShoppingCart {
         this.products = new ArrayList<>();
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(Product product) throws ProductNotFoundException {
         if (product == null) {
             throw new IllegalArgumentException("Cannot add a null product to the cart.");
         }
         // Example check for duplicates, if needed
         for (Product p : products) {
-            if (p.getProductID().equals(product.getProductID())) {
+            if (p.getId().equals(product.getId())) {
                 throw new IllegalArgumentException("Product is already in the cart.");
             }
         }
         products.add(product);
     }
 
-    public boolean removeProduct(Product product) {
+    public boolean removeProduct(Product product) throws ProductNotFoundException {
         if (product == null) {
             throw new IllegalArgumentException("Cannot remove a null product from the cart.");
         }
@@ -57,7 +57,7 @@ public class ShoppingCart {
         if (products.isEmpty()) {
             builder.append("The shopping cart is empty.\n");
         } else {
-            builder.append("Shopping Cart Contents:\n");
+            builder.append("Shopping Cart:\n");
             for (Product product : products) {
                 builder.append(product.toString()).append("\n");
             }

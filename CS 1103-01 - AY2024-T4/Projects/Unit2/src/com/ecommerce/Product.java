@@ -4,27 +4,27 @@ package com.ecommerce;
 import com.ecommerce.exceptions.InvalidProductException;
 
 public class Product {
-    private String productID;
+    private String id;
     private String name;
     private double price;
 
-    public Product(String productID, String name, double price) {
+    public Product(String productID, String name, double price) throws InvalidProductException {
         if (productID == null || productID.isEmpty()) {
-            throw new InvalidProductException("Product ID cannot be null or empty.");
+            throw new InvalidProductException("missing pruduct ID");
         }
         if (name == null || name.isEmpty()) {
-            throw new InvalidProductException("Product name cannot be null or empty.");
+            throw new InvalidProductException("missing product name");
         }
         if (price < 0) {
-            throw new InvalidProductException("Price cannot be negative.");
+            throw new InvalidProductException("invalid price, must be greater than or equal to 0");
         }
-        this.productID = productID;
+        this.id = productID;
         this.name = name;
         this.price = price;
     }
 
-    public String getProductID() {
-        return productID;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,9 +37,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product Details:\n" +
-                "ID: " + productID + "\n" +
-                "Name: " + name + "\n" +
-                "Price: $" + String.format("%.2f", price);
+        StringBuilder builder = new StringBuilder();
+        builder.append("Product:\n");
+        builder.append("- ID: ").append(id).append("\n");
+        builder.append("- Name: ").append(name).append("\n");
+        builder.append("- Price: $").append(String.format("%.2f", price)).append("\n");
+        return builder.toString();
     }
 }

@@ -6,18 +6,17 @@ import com.ecommerce.exceptions.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Products inspired by popular sci-fi movies and books
+            // Create products
             Product lightsaber = new Product("SW001", "Lightsaber", 199.99);
             Product hoverboard = new Product("BTTF001", "Hoverboard", 299.99);
             Product fluxCapacitor = new Product("BTTF002", "Flux Capacitor", 499.99);
             Product replicator = new Product("ST001", "Food Replicator", 1500.00);
 
-            // Sci-fi inspired customer: Marty from "Back to the Future"
+            // Create customers
             Customer marty = new Customer("BTTF100", "Marty McFly");
             marty.getShoppingCart().addProduct(hoverboard);
             marty.getShoppingCart().addProduct(fluxCapacitor);
 
-            // Sci-fi inspired customer: Luke from "Star Wars"
             Customer luke = new Customer("SW100", "Luke Skywalker");
             luke.getShoppingCart().addProduct(lightsaber);
 
