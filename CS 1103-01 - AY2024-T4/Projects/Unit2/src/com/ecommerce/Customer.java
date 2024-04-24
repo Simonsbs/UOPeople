@@ -1,4 +1,3 @@
-// File: com/ecommerce/Customer.java
 package com.ecommerce;
 
 public class Customer {
@@ -26,10 +25,14 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "ID='" + customerID + '\'' +
-                ", Name='" + name + '\'' +
-                ", ShoppingCart=" + shoppingCart +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append("Customer Details\n");
+        builder.append("ID: ").append(customerID).append("\n");
+        builder.append("Name: ").append(name).append("\n");
+        builder.append("Shopping Cart Contents:\n");
+
+        builder.append(shoppingCart);
+
+        return builder.toString();
     }
 }
