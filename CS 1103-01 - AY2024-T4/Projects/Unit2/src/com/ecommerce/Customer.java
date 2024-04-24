@@ -26,10 +26,9 @@ public class Customer {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Customer Details\n");
+        builder.append("Customer:\n");
         builder.append("ID: ").append(customerID).append("\n");
         builder.append("Name: ").append(name).append("\n");
-        builder.append("Shopping Cart Contents:\n");
 
         builder.append(shoppingCart);
 
