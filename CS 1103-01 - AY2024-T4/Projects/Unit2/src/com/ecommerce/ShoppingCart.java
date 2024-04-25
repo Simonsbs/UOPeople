@@ -14,12 +14,12 @@ public class ShoppingCart {
 
     public void addProduct(Product product) throws ProductNotFoundException {
         if (product == null) {
-            throw new IllegalArgumentException("Cannot add a null product to the cart.");
+            throw new IllegalArgumentException("Cannot add a null to the cart");
         }
         // Example check for duplicates, if needed
         for (Product p : products) {
             if (p.getId().equals(product.getId())) {
-                throw new IllegalArgumentException("Product is already in the cart.");
+                throw new IllegalArgumentException("Cannot add product with same id to the cart.");
             }
         }
         products.add(product);
@@ -27,7 +27,7 @@ public class ShoppingCart {
 
     public boolean removeProduct(Product product) throws ProductNotFoundException {
         if (product == null) {
-            throw new IllegalArgumentException("Cannot remove a null product from the cart.");
+            throw new IllegalArgumentException("Cannot remove a null from the cart.");
         }
         if (!products.contains(product)) {
             throw new ProductNotFoundException("Product not found in the cart.");
@@ -55,9 +55,9 @@ public class ShoppingCart {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (products.isEmpty()) {
-            builder.append("The shopping cart is empty.\n");
+            builder.append("cart is empty.\n");
         } else {
-            builder.append("Shopping Cart:\n");
+            builder.append("Cart:\n");
             for (Product product : products) {
                 builder.append(product.toString()).append("\n");
             }
