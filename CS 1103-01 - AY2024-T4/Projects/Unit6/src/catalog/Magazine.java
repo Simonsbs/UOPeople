@@ -1,8 +1,21 @@
 package catalog;
 
+/**
+ * Represents a Magazine in the library catalog.
+ */
 public class Magazine extends LibraryItem {
     private int issueNumber;
 
+    /**
+     * Constructor for creating a Magazine instance.
+     *
+     * @param id            The ID of the magazine.
+     * @param title         The title of the magazine.
+     * @param author        The editor of the magazine.
+     * @param publishedYear The year the magazine was published.
+     * @param genre         The genre of the magazine.
+     * @param issueNumber   The issue number of the magazine.
+     */
     public Magazine(int id, String title, String author, int publishedYear, String genre, int issueNumber) {
         super(id, title, author, publishedYear, genre);
         if (!Tools.isValidIssueNumber(issueNumber)) {

@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
+/**
+ * Utility class for validation and input operations.
+ */
 public class Tools {
     private static Scanner scanner;
 
@@ -37,6 +40,14 @@ public class Tools {
         return year > 1000 && year <= java.time.Year.now().getValue();
     }
 
+    /**
+     * Validates and retrieves input from the user.
+     *
+     * @param prompt The prompt to display to the user.
+     * @param type   The type of input expected.
+     * @param <T>    The type parameter.
+     * @return The validated input.
+     */
     public static <T> T getValidatedInput(String prompt, Class<T> type) {
         while (true) {
             System.out.print(prompt);
@@ -77,12 +88,21 @@ public class Tools {
         }
     }
 
+    /**
+     * Closes the scanner.
+     */
     public static void closeScanner() {
         if (scanner != null) {
             scanner.close();
         }
     }
 
+    /**
+     * Loads test data from a file into the catalog.
+     *
+     * @param catalog  The catalog to load data into.
+     * @param filename The name of the file containing test data.
+     */
     public static void loadTestData(GenericCatalog<LibraryItem> catalog, String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;

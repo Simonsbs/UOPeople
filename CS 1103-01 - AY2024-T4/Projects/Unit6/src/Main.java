@@ -12,15 +12,15 @@ public class Main {
             try {
                 switch (choice) {
                     case 1:
-                        LibraryItem book = createItem("Book");
+                        LibraryItem book = createItem(ItemType.BOOK);
                         catalog.addItem(book);
                         break;
                     case 2:
-                        LibraryItem dvd = createItem("DVD");
+                        LibraryItem dvd = createItem(ItemType.DVD);
                         catalog.addItem(dvd);
                         break;
                     case 3:
-                        LibraryItem magazine = createItem("Magazine");
+                        LibraryItem magazine = createItem(ItemType.MAGAZINE);
                         catalog.addItem(magazine);
                         break;
                     case 4:
@@ -64,22 +64,28 @@ public class Main {
         System.out.println("------------------------------");
     }
 
-    private static LibraryItem createItem(String itemType) {
-        int id = Tools.getValidatedInput(String.format("Enter %s ID: ", itemType), Integer.class);
-        String title = Tools.getValidatedInput(String.format("Enter %s title: ", itemType), String.class);
-        String author = Tools.getValidatedInput(String.format("Enter %s author: ", itemType), String.class);
-        int publishedYear = Tools.getValidatedInput(String.format("Enter %s published year: ", itemType),
+    /**
+     * Creates a library item based on the specified type.
+     *
+     * @param itemType The type of item to create (BOOK, DVD, MAGAZINE).
+     * @return The created library item.
+     */
+    private static LibraryItem createItem(ItemType itemType) {
+        int id = Tools.getValidatedInput(String.format("Enter %s ID: ", itemType.name()), Integer.class);
+        String title = Tools.getValidatedInput(String.format("Enter %s title: ", itemType.name()), String.class);
+        String author = Tools.getValidatedInput(String.format("Enter %s author: ", itemType.name()), String.class);
+        int publishedYear = Tools.getValidatedInput(String.format("Enter %s published year: ", itemType.name()),
                 Integer.class);
-        String genre = Tools.getValidatedInput(String.format("Enter %s genre: ", itemType), String.class);
+        String genre = Tools.getValidatedInput(String.format("Enter %s genre: ", itemType.name()), String.class);
 
         switch (itemType) {
-            case "Book":
+            case BOOK:
                 int pages = Tools.getValidatedInput("Enter number of pages: ", Integer.class);
                 return new Book(id, title, author, publishedYear, genre, pages);
-            case "DVD":
+            case DVD:
                 int duration = Tools.getValidatedInput("Enter duration in minutes: ", Integer.class);
                 return new DVD(id, title, author, publishedYear, genre, duration);
-            case "Magazine":
+            case MAGAZINE:
                 int issueNumber = Tools.getValidatedInput("Enter issue number: ", Integer.class);
                 return new Magazine(id, title, author, publishedYear, genre, issueNumber);
             default:
@@ -87,6 +93,12 @@ public class Main {
         }
     }
 
+    /**
+     * Searches the catalog for an item by its title.
+     *
+     * @param catalog The catalog to search.
+     * @param title   The title of the item to search for.
+     */
     private static void searchByTitle(GenericCatalog<LibraryItem> catalog, String title) {
         LibraryItem foundItem = catalog.getItems().stream()
                 .filter(item -> item.getTitle().equalsIgnoreCase(title))

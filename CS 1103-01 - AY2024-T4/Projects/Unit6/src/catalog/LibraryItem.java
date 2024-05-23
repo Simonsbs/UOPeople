@@ -1,5 +1,8 @@
 package catalog;
 
+/**
+ * Represents a generic library item.
+ */
 public class LibraryItem {
     private int id;
     private String title;
@@ -7,6 +10,15 @@ public class LibraryItem {
     private int publishedYear;
     private String genre;
 
+    /**
+     * Constructor for creating a LibraryItem instance.
+     *
+     * @param id            The ID of the item.
+     * @param title         The title of the item.
+     * @param author        The author of the item.
+     * @param publishedYear The year the item was published.
+     * @param genre         The genre of the item.
+     */
     public LibraryItem(int id, String title, String author, int publishedYear, String genre) {
         this.id = id;
         this.title = title;
