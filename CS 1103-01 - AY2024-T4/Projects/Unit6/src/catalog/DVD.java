@@ -17,8 +17,6 @@ public class DVD extends LibraryItem {
 
     @Override
     public String toString() {
-        return String.format(
-                "DVD [ID: %d, Title: %s, Director: %s, Published Year: %d, Genre: %s, Duration: %d minutes]", getID(),
-                getTitle(), getAuthor(), getPublishedYear(), getGenre(), duration);
+        return String.format("%s\n  Type: DVD\n  Duration: %d minutes", super.toString(), duration);
     }
 }

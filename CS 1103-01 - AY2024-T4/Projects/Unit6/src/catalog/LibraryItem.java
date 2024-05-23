@@ -37,7 +37,7 @@ public class LibraryItem {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, Title: %s, Author: %s, Published Year: %d, Genre: %s", id, title, author,
-                publishedYear, genre);
+        return String.format("Library Item\n  ID: %d\n  Title: %s\n  Author: %s\n  Published Year: %d\n  Genre: %s",
+                id, title, author, publishedYear, genre);
     }
 }

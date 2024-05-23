@@ -17,7 +17,6 @@ public class Book extends LibraryItem {
 
     @Override
     public String toString() {
-        return String.format("Book [ID: %d, Title: %s, Author: %s, Published Year: %d, Genre: %s, Pages: %d]", getID(),
-                getTitle(), getAuthor(), getPublishedYear(), getGenre(), pages);
+        return String.format("%s\n  Type: Book\n  Pages: %d", super.toString(), pages);
     }
 }

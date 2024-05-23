@@ -86,7 +86,7 @@ public class Main {
                 .findFirst()
                 .orElse(null);
         if (foundItem != null) {
-            System.out.println("Item found: " + foundItem);
+            System.out.println("Item found: \n" + foundItem);
         } else {
             System.out.println("Item with title \"" + title + "\" not found.");
         }

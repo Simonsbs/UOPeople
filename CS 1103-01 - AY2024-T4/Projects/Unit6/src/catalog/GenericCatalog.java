@@ -13,7 +13,7 @@ public class GenericCatalog<T extends LibraryItem> {
     public void addItem(T item) {
         if (catalog.stream().anyMatch(existingItem -> existingItem.getID() == item.getID())) {
             throw new CustomExceptions.ItemAlreadyExistsException(
-                    "Item with ID " + item.getID() + " already exists in the catalog.");
+                    String.format("Item with ID %d already exists in the catalog.", item.getID()));
         }
         catalog.add(item);
         System.out.println(String.format("%s added to the library catalog.", item.getTitle()));
@@ -24,7 +24,7 @@ public class GenericCatalog<T extends LibraryItem> {
                 .filter(existingItem -> existingItem.getID() == itemID)
                 .findFirst()
                 .orElseThrow(() -> new CustomExceptions.ItemNotFoundException(
-                        "Item with ID " + itemID + " not found in the catalog."));
+                        String.format("Item with ID %d not found in the catalog.", itemID)));
         catalog.remove(item);
         System.out.println(String.format("%s removed from the library catalog.", item.getTitle()));
     }
@@ -34,7 +34,7 @@ public class GenericCatalog<T extends LibraryItem> {
                 .filter(item -> item.getID() == itemID)
                 .findFirst()
                 .orElseThrow(() -> new CustomExceptions.ItemNotFoundException(
-                        "Item with ID " + itemID + " not found in the catalog."));
+                        String.format("Item with ID %d not found in the catalog.", itemID)));
     }
 
     public List<T> getItems() {
@@ -46,7 +46,7 @@ public class GenericCatalog<T extends LibraryItem> {
             System.out.println("No items in the catalog.");
         } else {
             System.out.println("Catalog Items:");
-            catalog.forEach(item -> System.out.println(String.format("\t%s", item)));
+            catalog.forEach(item -> System.out.println(String.format("-> %s", item)));
         }
     }
 }

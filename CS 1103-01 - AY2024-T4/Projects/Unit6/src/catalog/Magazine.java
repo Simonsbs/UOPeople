@@ -17,8 +17,6 @@ public class Magazine extends LibraryItem {
 
     @Override
     public String toString() {
-        return String.format(
-                "Magazine [ID: %d, Title: %s, Editor: %s, Published Year: %d, Genre: %s, Issue Number: %d]", getID(),
-                getTitle(), getAuthor(), getPublishedYear(), getGenre(), issueNumber);
+        return String.format("%s\n  Type: Magazine\n  Issue Number: %d", super.toString(), issueNumber);
     }
 }
