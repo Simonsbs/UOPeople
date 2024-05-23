@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;
 
 public class Tools {
-    private static Scanner scanner; // Initialize in a static block or method
+    private static Scanner scanner;
 
     static {
         scanner = new Scanner(System.in);
@@ -28,6 +28,10 @@ public class Tools {
 
     public static boolean isValidIssueNumber(int issueNumber) {
         return issueNumber > 0;
+    }
+
+    public static boolean isValidYear(int year) {
+        return year > 1000 && year <= java.time.Year.now().getValue();
     }
 
     public static <T> T getValidatedInput(String prompt, Class<T> type) {
@@ -72,7 +76,7 @@ public class Tools {
 
     public static void closeScanner() {
         if (scanner != null) {
-            scanner.close(); // Properly close the scanner
+            scanner.close();
         }
     }
 }

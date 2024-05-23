@@ -1,10 +1,10 @@
 package catalog;
 
 public class DVD extends LibraryItem {
-    private int duration; // Duration in minutes
+    private int duration;
 
-    public DVD(int id, String title, String author, int duration) {
-        super(id, title, author);
+    public DVD(int id, String title, String author, int publishedYear, String genre, int duration) {
+        super(id, title, author, publishedYear, genre);
         if (!Tools.isValidDuration(duration)) {
             throw new IllegalArgumentException("Invalid duration. Duration must be greater than 0.");
         }
@@ -17,7 +17,8 @@ public class DVD extends LibraryItem {
 
     @Override
     public String toString() {
-        return String.format("DVD [ID: %d, Title: %s, Director: %s, Duration: %d minutes]", getID(), getTitle(),
-                getAuthor(), duration);
+        return String.format(
+                "DVD [ID: %d, Title: %s, Director: %s, Published Year: %d, Genre: %s, Duration: %d minutes]", getID(),
+                getTitle(), getAuthor(), getPublishedYear(), getGenre(), duration);
     }
 }
