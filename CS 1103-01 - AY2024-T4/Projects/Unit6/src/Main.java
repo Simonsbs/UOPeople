@@ -51,7 +51,8 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("Library Catalog Menu:");
+        System.out.println("------------------------------");
+        System.out.println("Sci-Fi Library Catalog Menu:");
         System.out.println("1. Add Book");
         System.out.println("2. Add DVD");
         System.out.println("3. Add Magazine");
@@ -60,14 +61,16 @@ public class Main {
         System.out.println("6. Search by Title");
         System.out.println("7. Load Test Data");
         System.out.println("8. Exit");
+        System.out.println("------------------------------");
     }
 
     private static LibraryItem createItem(String itemType) {
-        int id = Tools.getValidatedInput("Enter " + itemType + " ID: ", Integer.class);
-        String title = Tools.getValidatedInput("Enter " + itemType + " title: ", String.class);
-        String author = Tools.getValidatedInput("Enter " + itemType + " author: ", String.class);
-        int publishedYear = Tools.getValidatedInput("Enter " + itemType + " published year: ", Integer.class);
-        String genre = Tools.getValidatedInput("Enter " + itemType + " genre: ", String.class);
+        int id = Tools.getValidatedInput(String.format("Enter %s ID: ", itemType), Integer.class);
+        String title = Tools.getValidatedInput(String.format("Enter %s title: ", itemType), String.class);
+        String author = Tools.getValidatedInput(String.format("Enter %s author: ", itemType), String.class);
+        int publishedYear = Tools.getValidatedInput(String.format("Enter %s published year: ", itemType),
+                Integer.class);
+        String genre = Tools.getValidatedInput(String.format("Enter %s genre: ", itemType), String.class);
 
         switch (itemType) {
             case "Book":
@@ -90,9 +93,9 @@ public class Main {
                 .findFirst()
                 .orElse(null);
         if (foundItem != null) {
-            System.out.println("Item found: \n" + foundItem);
+            System.out.println(String.format("Item found: \n%s", foundItem));
         } else {
-            System.out.println("Item with title \"" + title + "\" not found.");
+            System.out.println(String.format("Item with title \"%s\" not found.", title));
         }
     }
 }
