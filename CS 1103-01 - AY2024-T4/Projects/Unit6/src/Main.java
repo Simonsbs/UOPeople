@@ -35,6 +35,9 @@ public class Main {
                         searchByTitle(catalog, titleToSearch);
                         break;
                     case 7:
+                        Tools.loadTestData(catalog, "testdata.txt");
+                        break;
+                    case 8:
                         running = false;
                         break;
                     default:
@@ -55,7 +58,8 @@ public class Main {
         System.out.println("4. Remove Item");
         System.out.println("5. View Catalog");
         System.out.println("6. Search by Title");
-        System.out.println("7. Exit");
+        System.out.println("7. Load Test Data");
+        System.out.println("8. Exit");
     }
 
     private static LibraryItem createItem(String itemType) {

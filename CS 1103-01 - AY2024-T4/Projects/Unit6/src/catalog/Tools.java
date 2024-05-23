@@ -1,5 +1,8 @@
 package catalog;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
@@ -77,6 +80,40 @@ public class Tools {
     public static void closeScanner() {
         if (scanner != null) {
             scanner.close();
+        }
+    }
+
+    public static void loadTestData(GenericCatalog<LibraryItem> catalog, String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                String type = parts[0].trim();
+                int id = Integer.parseInt(parts[1].trim());
+                String title = parts[2].trim();
+                String author = parts[3].trim();
+                int publishedYear = Integer.parseInt(parts[4].trim());
+                String genre = parts[5].trim();
+
+                switch (type) {
+                    case "Book":
+                        int pages = Integer.parseInt(parts[6].trim());
+                        catalog.addItem(new Book(id, title, author, publishedYear, genre, pages));
+                        break;
+                    case "DVD":
+                        int duration = Integer.parseInt(parts[6].trim());
+                        catalog.addItem(new DVD(id, title, author, publishedYear, genre, duration));
+                        break;
+                    case "Magazine":
+                        int issueNumber = Integer.parseInt(parts[6].trim());
+                        catalog.addItem(new Magazine(id, title, author, publishedYear, genre, issueNumber));
+                        break;
+                    default:
+                        System.out.println("Unknown item type: " + type);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading test data: " + e.getMessage());
         }
     }
 }
