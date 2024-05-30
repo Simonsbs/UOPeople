@@ -1,4 +1,4 @@
-### Readme for Chat Application
+# Readme for Chat Application
 
 Author: [Simon Stirling](https://bestdev.co.il)
 
@@ -24,10 +24,10 @@ This online chat application allows multiple users to connect to a central serve
 
 ## Project Structure
 
-```
+```plaintext
 ProjectRoot
 │   run.bat
-|   README.md
+|   readme.md
 └───src
     ├───ChatServer.java
     └───ChatClient.java
