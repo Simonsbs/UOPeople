@@ -16,13 +16,13 @@
         <!-- Main Column -->
         <VBox alignment="CENTER" prefHeight="447.0" prefWidth="363.0" spacing="10.0">
             <children>
-                <TextField fx:id="locationInput" promptText="Enter location (e.g., city name or coordinates)" />
+                <TextField fx:id="locationSelection" promptText="Enter location (e.g., city name or coordinates)" />
                 <HBox alignment="CENTER" spacing="10.0">
                     <Button mnemonicParsing="false" onAction="#handleGetWeather" text="Get Weather" />
-                    <ToggleButton fx:id="unitToggle" text="°C / °F" />
-                    <ToggleButton fx:id="windToggle" text="m/s / mph" />
+                    <ToggleButton fx:id="tempUnitToggle" text="°C / °F" />
+                    <ToggleButton fx:id="windUnitToggle" text="m/s / mph" />
                 </HBox>
-                <ImageView fx:id="weatherImageView" />
+                <ImageView fx:id="currentWeatherImageView" />
                 <Label fx:id="weatherInfoLabel" wrapText="true" />
                 <Label fx:id="forecastLabel" text="Weekly Forecast:" />
                 <StackPane fx:id="forecastContainer" alignment="CENTER">

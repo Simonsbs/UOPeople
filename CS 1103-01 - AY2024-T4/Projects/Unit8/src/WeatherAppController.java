@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.geometry.Pos;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONObject;
@@ -27,13 +28,13 @@ import java.io.IOException;
 
 public class WeatherAppController {
     @FXML
-    private TextField locationInput;
+    private TextField locationSelection;
     @FXML
     private Label weatherInfoLabel;
     @FXML
     private Label historyLabel;
     @FXML
-    private ImageView weatherImageView;
+    private ImageView currentWeatherImageView;
     @FXML
     private HBox forecastHBox;
     @FXML
@@ -41,9 +42,9 @@ public class WeatherAppController {
     @FXML
     private ListView<String> historyListView;
     @FXML
-    private ToggleButton unitToggle;
+    private ToggleButton windUnitToggle;
     @FXML
-    private ToggleButton windToggle;
+    private ToggleButton tempUnitToggle;
 
     private ObservableList<String> searchHistory = FXCollections.observableArrayList();
     private boolean isCelsius = true;
@@ -54,7 +55,7 @@ public class WeatherAppController {
 
     @FXML
     private void handleGetWeather() {
-        String location = locationInput.getText();
+        String location = locationSelection.getText();
         if (location.isEmpty()) {
             showError("Location input cannot be empty.");
             return;
@@ -192,7 +193,7 @@ public class WeatherAppController {
     private void setWeatherImage(String iconCode) {
         String imageUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
         Image image = new Image(imageUrl);
-        weatherImageView.setImage(image);
+        currentWeatherImageView.setImage(image);
     }
 
     private void showError(String message) {
@@ -216,69 +217,38 @@ public class WeatherAppController {
     private void updateBackground() {
         int hour = LocalDateTime.now(locationZoneId).getHour();
         if (hour >= 6 && hour < 18) {
-            locationInput.getScene().getRoot().setStyle("-fx-background-color: lightyellow;");
+            locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightyellow;");
         } else {
-            locationInput.getScene().getRoot().setStyle("-fx-background-color: lightblue;");
-        }
-    }
-
-    private void fetchInitialLocation() {
-        try {
-            String geoApiUrl = "https://api.geoapify.com/v1/ipinfo?&apiKey=fa82472c9a884c9eaa2e7c4aeaf4833a";
-            URL url = new URI(geoApiUrl).toURL();
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode == 200) {
-                String inline = "";
-                Scanner scanner = new Scanner(url.openStream());
-                while (scanner.hasNext()) {
-                    inline += scanner.nextLine();
-                }
-                scanner.close();
-
-                JSONObject data = new JSONObject(inline);
-                JSONObject location = data.getJSONObject("location");
-                double latitude = location.getDouble("latitude");
-                double longitude = location.getDouble("longitude");
-
-                // log the initial location data to the console
-                System.out.println("Initial location data:");
-                System.out.println("Latitude: " + latitude);
-                System.out.println("Longitude: " + longitude);
-                // fetchWeatherData("latitude + ", " + longitude");
-            } else {
-                showError("Error fetching initial location data. Response code: " + responseCode);
-            }
-        } catch (IOException | URISyntaxException e) {
-            showError("Error fetching initial location data: " + e.getMessage());
+            locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightblue;");
         }
     }
 
     @FXML
     private void initialize() {
-        fetchInitialLocation();
-
-        unitToggle.setOnAction(e -> {
-            isCelsius = !unitToggle.isSelected();
-            unitToggle.setText(isCelsius ? "°C" : "°F");
-            updateCurrentWeatherDisplay(locationInput.getText());
+        windUnitToggle.setOnAction(e -> {
+            isCelsius = !windUnitToggle.isSelected();
+            windUnitToggle.setText(isCelsius ? "°C" : "°F");
+            updateCurrentWeatherDisplay(locationSelection.getText());
             updateWeeklyForecastDisplay();
         });
-        unitToggle.setText(isCelsius ? "°C" : "°F");
+        windUnitToggle.setText(isCelsius ? "°C" : "°F");
 
-        windToggle.setOnAction(e -> {
-            isMetersPerSecond = !windToggle.isSelected();
-            windToggle.setText(isMetersPerSecond ? "m/s" : "mph");
-            updateCurrentWeatherDisplay(locationInput.getText());
+        tempUnitToggle.setOnAction(e -> {
+            isMetersPerSecond = !tempUnitToggle.isSelected();
+            tempUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
+            updateCurrentWeatherDisplay(locationSelection.getText());
         });
-        windToggle.setText(isMetersPerSecond ? "m/s" : "mph");
+        tempUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
 
         historyListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-                locationInput.setText(newVal.split(" at ")[0]);
+                locationSelection.setText(newVal.split(" at ")[0]);
             }
+        });
+
+        Platform.runLater(() -> {
+            locationSelection.setText("tel-aviv");
+            handleGetWeather();
         });
     }
 }
