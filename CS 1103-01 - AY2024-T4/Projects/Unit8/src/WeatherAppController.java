@@ -60,6 +60,10 @@ public class WeatherAppController {
             return;
         }
 
+        fetchWeatherData(location);
+    }
+
+    private void fetchWeatherData(String location) {
         try {
             String apiKey = "9a6ae9b001d294e592710366fa041c78";
             String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
@@ -218,8 +222,44 @@ public class WeatherAppController {
         }
     }
 
+    private void fetchInitialLocation() {
+        try {
+            String geoApiUrl = "https://api.geoapify.com/v1/ipinfo?&apiKey=fa82472c9a884c9eaa2e7c4aeaf4833a";
+            URL url = new URI(geoApiUrl).toURL();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200) {
+                String inline = "";
+                Scanner scanner = new Scanner(url.openStream());
+                while (scanner.hasNext()) {
+                    inline += scanner.nextLine();
+                }
+                scanner.close();
+
+                JSONObject data = new JSONObject(inline);
+                JSONObject location = data.getJSONObject("location");
+                double latitude = location.getDouble("latitude");
+                double longitude = location.getDouble("longitude");
+
+                // log the initial location data to the console
+                System.out.println("Initial location data:");
+                System.out.println("Latitude: " + latitude);
+                System.out.println("Longitude: " + longitude);
+                // fetchWeatherData("latitude + ", " + longitude");
+            } else {
+                showError("Error fetching initial location data. Response code: " + responseCode);
+            }
+        } catch (IOException | URISyntaxException e) {
+            showError("Error fetching initial location data: " + e.getMessage());
+        }
+    }
+
     @FXML
     private void initialize() {
+        fetchInitialLocation();
+
         unitToggle.setOnAction(e -> {
             isCelsius = !unitToggle.isSelected();
             unitToggle.setText(isCelsius ? "°C" : "°F");
