@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -83,8 +85,19 @@ public class WeatherAppController {
     private void fetchWeatherData(String location) {
         try {
             String units = isCelsius ? "metric" : "imperial";
-            String currentWeatherUrl = buildWeatherUrl(location, units, "weather");
-            String forecastUrl = buildWeatherUrl(location, units, "forecast");
+            String currentWeatherUrl;
+            String forecastUrl;
+
+            if (location.contains(",")) {
+                String[] coords = location.split(",");
+                String latitude = coords[0].trim();
+                String longitude = coords[1].trim();
+                currentWeatherUrl = buildWeatherUrlForCoordinates(latitude, longitude, units, "weather");
+                forecastUrl = buildWeatherUrlForCoordinates(latitude, longitude, units, "forecast");
+            } else {
+                currentWeatherUrl = buildWeatherUrlForCity(location, units, "weather");
+                forecastUrl = buildWeatherUrlForCity(location, units, "forecast");
+            }
 
             fetchCurrentWeather(currentWeatherUrl, location);
             fetchWeeklyForecast(forecastUrl);
@@ -97,7 +110,7 @@ public class WeatherAppController {
     }
 
     /**
-     * Builds the URL for the weather API request.
+     * Builds the URL for the weather API request using city name.
      *
      * @param location the location for which to fetch weather data
      * @param units    the units for temperature (metric or imperial)
@@ -105,10 +118,24 @@ public class WeatherAppController {
      * @return the complete URL for the API request
      * @throws IOException if an encoding error occurs
      */
-    private String buildWeatherUrl(String location, String units, String endpoint) throws IOException {
+    private String buildWeatherUrlForCity(String location, String units, String endpoint) throws IOException {
         String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
         return String.format("http://api.openweathermap.org/data/2.5/%s?q=%s&units=%s&appid=%s", endpoint,
                 encodedLocation, units, API_KEY);
+    }
+
+    /**
+     * Builds the URL for the weather API request using coordinates.
+     *
+     * @param latitude  the latitude of the location
+     * @param longitude the longitude of the location
+     * @param units     the units for temperature (metric or imperial)
+     * @param endpoint  the API endpoint (weather or forecast)
+     * @return the complete URL for the API request
+     */
+    private String buildWeatherUrlForCoordinates(String latitude, String longitude, String units, String endpoint) {
+        return String.format("http://api.openweathermap.org/data/2.5/%s?lat=%s&lon=%s&units=%s&appid=%s", endpoint,
+                latitude, longitude, units, API_KEY);
     }
 
     /**
@@ -274,6 +301,42 @@ public class WeatherAppController {
     }
 
     /**
+     * Fetches the initial location data based on the user's IP address.
+     * Automatically fetches the weather data for the initial location.
+     * uses the Geoapify API to get the location data.
+     */
+    private void fetchInitialLocation() {
+        try {
+            String geoApiUrl = "https://api.geoapify.com/v1/ipinfo?&apiKey=fa82472c9a884c9eaa2e7c4aeaf4833a";
+            URL url = new URI(geoApiUrl).toURL();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200) {
+                String inline = "";
+                Scanner scanner = new Scanner(url.openStream());
+                while (scanner.hasNext()) {
+                    inline += scanner.nextLine();
+                }
+                scanner.close();
+
+                JSONObject data = new JSONObject(inline);
+                JSONObject location = data.getJSONObject("location");
+                double latitude = location.getDouble("latitude");
+                double longitude = location.getDouble("longitude");
+
+                locationSelection.setText(latitude + "," + longitude);
+                handleGetWeather();
+            } else {
+                showError("Error fetching initial location data. Response code: " + responseCode);
+            }
+        } catch (IOException | URISyntaxException e) {
+            showError("Error fetching initial location data: " + e.getMessage());
+        }
+    }
+
+    /**
      * Initializes the controller. Sets up event handlers and initial state.
      */
     @FXML
@@ -300,8 +363,7 @@ public class WeatherAppController {
         });
 
         Platform.runLater(() -> {
-            locationSelection.setText("tel-aviv");
-            handleGetWeather();
+            fetchInitialLocation();
         });
     }
 }

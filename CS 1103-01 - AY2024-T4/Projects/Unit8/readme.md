@@ -1,66 +1,72 @@
-# Weather Information App
+# Weather Information Application
 
-## Description
+**Author**: [Simon B.Stirling](https://bestdev.co.il)
 
-The Weather Information App is a JavaFX application that fetches and displays weather information for a given location. It uses the OpenWeatherMap API to get current weather data and a 5-day weather forecast. The application also maintains a search history for quick access to previously searched locations.
+## Overview
 
-### Features
+This Weather Information Application provides current weather conditions and a weekly forecast for any specified location. The application uses the OpenWeatherMap API to fetch weather data and displays the information in a user-friendly interface.
 
-- Displays current weather information including temperature, humidity, wind speed, and weather conditions.
-- Displays a 5-day weather forecast with temperature and weather conditions.
-- Allows toggling between Celsius and Fahrenheit for temperature.
-- Allows toggling between meters per second (m/s) and miles per hour (mph) for wind speed.
-- Maintains a search history of the last 5 locations.
+## Features
 
-### Requirements
+- Fetch current weather data and weekly forecast for any city or geographic coordinates.
+- Display weather conditions, temperature, humidity, wind speed, and weather icons.
+- Maintain a search history of the last 5 searched locations.
+- Toggle between Celsius and Fahrenheit for temperature units.
+- Toggle between meters per second and miles per hour for wind speed units.
+- Automatically fetch weather data for the user's initial location based on their IP address using the Geoapify API.
 
-- Java 11 or later
-- JavaFX SDK 11 or later
-- org.json package
+## Requirements
 
-### How to Run
+- Java 11 or higher
+- JavaFX SDK
+- `org.json` package for JSON parsing
+- Internet connection
 
-1. **Set up JavaFX:**
+## Setup
 
-   - Download and install the JavaFX SDK from [Gluon](https://gluonhq.com/products/javafx/).
-   - Set the `PATH_TO_FX` environment variable to the lib directory of the JavaFX SDK.
+1. Download and install Java from [https://www.oracle.com/java/technologies/javase-jdk11-downloads.html](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+2. Download and install JavaFX from [https://gluonhq.com/products/javafx/](https://gluonhq.com/products/javafx/).
+3. Add the JavaFX SDK to your project's library path.
+4. Add the `org.json` package to your project's library path. You can download it from [https://mvnrepository.com/artifact/org.json/json](https://mvnrepository.com/artifact/org.json/json).
 
-2. **Set up org.json:**
+## Running the Application
 
-   - Download the `org.json` package from [Maven Repository](https://mvnrepository.com/artifact/org.json/json).
-   - Add the `org.json` JAR file to the classpath.
+1. Clone or download the project.
+2. Ensure that the JavaFX SDK and `org.json` package are correctly added to your project's library path.
+3. Compile and run the `Main.java` file.
 
-3. **Compile the Application:**
+## Usage
 
-   - Open a terminal and navigate to the directory containing the source files.
-   - Run the following command to compile the application:
+1. **Enter a location**: Type a city name (e.g., "London") or geographic coordinates (e.g., "51.5074,-0.1278") into the text field and click the "Get Weather" button.
+2. **Toggle units**: Use the toggle buttons to switch between Celsius/Fahrenheit for temperature and meters per second/miles per hour for wind speed.
+3. **Search history**: View your last 5 searched locations in the search history list. Click on a location to fetch the weather data for that location again.
+4. **Automatic location**: On startup, the application automatically fetches the weather data for your initial location based on your IP address using the Geoapify API.
 
-     ```sh
-     javac --module-path $PATH_TO_FX --add-modules javafx.controls,javafx.fxml -cp .:json-20210307.jar src/*.java
-     ```
+## Notes
 
-4. **Run the Application:**
+- The application uses the OpenWeatherMap API for fetching weather data. You need an API key to use this service. The default API key provided in the code is for demonstration purposes. Replace it with your own API key for production use.
+- The application uses the Geoapify API to fetch the user's initial location based on their IP address. This feature helps in providing an automatic weather update for the user's current location without requiring manual input.
 
-   - Run the following command to start the application:
+## Credits
 
-     ```sh
-     java --module-path $PATH_TO_FX --add-modules javafx.controls,javafx.fxml -cp .:json-20210307.jar src.Main
-     ```
+- The application interface was built using SceneBuilder.
+- Weather data provided by [OpenWeatherMap](https://openweathermap.org/).
+- IP-based geolocation provided by [Geoapify](https://www.geoapify.com/).
 
-### UI Design
+## Screenshots
 
-- The user interface was designed using **SceneBuilder**, a visual layout tool for JavaFX applications. SceneBuilder allows for drag-and-drop design of UI components and automatically generates the corresponding FXML file.
-- The `WeatherApp.fxml` file, which defines the layout and structure of the application's UI, was created using SceneBuilder. It should be located in the same directory as the compiled classes or properly referenced in the project setup.
+### Screenshot 1
 
-### Screenshots
+![Screenshot 1](screenshot1.png)
 
-![screenshot1](screenshot1.png)
-![screenshot2](screenshot2.png)
-![screenshot3](screenshot3.png)
-![screenshot4](screenshot4.png)
+### Screenshot 2
 
-### Notes
+![Screenshot 2](screenshot2.png)
 
-- Ensure that the `WeatherApp.fxml` file is located in the same directory as the compiled classes or properly referenced in the project setup.
-- The application requires an internet connection to fetch weather data from the OpenWeatherMap API.
-- The default location is set to "tel-aviv" for the initial weather data fetch.
+### Screenshot 3
+
+![Screenshot 3](screenshot3.png)
+
+### Screenshot 4
+
+![Screenshot 4](screenshot4.png)
