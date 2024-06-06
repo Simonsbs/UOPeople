@@ -25,8 +25,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Controller class for the WeatherApp. Handles user interactions and data
+ * fetching. Updates the UI based on the fetched data. Implements the logic for
+ * the WeatherApp. Uses the OpenWeatherMap API to fetch weather data.
+ */
 public class WeatherAppController {
-
     @FXML
     private TextField locationSelection;
     @FXML
@@ -55,6 +59,10 @@ public class WeatherAppController {
 
     private static final String API_KEY = "9a6ae9b001d294e592710366fa041c78";
 
+    /**
+     * Handles the "Get Weather" button click. Fetches weather data for the entered
+     * location. Shows an error message if the location is empty.
+     */
     @FXML
     private void handleGetWeather() {
         String location = locationSelection.getText();
@@ -65,6 +73,13 @@ public class WeatherAppController {
         fetchWeatherData(location);
     }
 
+    /**
+     * Fetches weather data from the OpenWeatherMap API for the specified location.
+     * Updates the current weather display, weekly forecast display, and search
+     * history.
+     *
+     * @param location the location for which to fetch weather data
+     */
     private void fetchWeatherData(String location) {
         try {
             String units = isCelsius ? "metric" : "imperial";
@@ -81,12 +96,29 @@ public class WeatherAppController {
         }
     }
 
+    /**
+     * Builds the URL for the weather API request.
+     *
+     * @param location the location for which to fetch weather data
+     * @param units    the units for temperature (metric or imperial)
+     * @param endpoint the API endpoint (weather or forecast)
+     * @return the complete URL for the API request
+     * @throws IOException if an encoding error occurs
+     */
     private String buildWeatherUrl(String location, String units, String endpoint) throws IOException {
         String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
         return String.format("http://api.openweathermap.org/data/2.5/%s?q=%s&units=%s&appid=%s", endpoint,
                 encodedLocation, units, API_KEY);
     }
 
+    /**
+     * Fetches the current weather data from the API and updates the display.
+     *
+     * @param urlString the URL for the API request
+     * @param location  the location for which to fetch weather data
+     * @throws IOException, URISyntaxException if an error occurs during the API
+     *                      request
+     */
     private void fetchCurrentWeather(String urlString, String location) throws IOException, URISyntaxException {
         URL url = new URI(urlString).toURL();
         try (Scanner scanner = new Scanner(url.openStream())) {
@@ -96,6 +128,13 @@ public class WeatherAppController {
         }
     }
 
+    /**
+     * Fetches the weekly forecast data from the API and updates the display.
+     *
+     * @param urlString the URL for the API request
+     * @throws IOException, URISyntaxException if an error occurs during the API
+     *                      request
+     */
     private void fetchWeeklyForecast(String urlString) throws IOException, URISyntaxException {
         URL url = new URI(urlString).toURL();
         try (Scanner scanner = new Scanner(url.openStream())) {
@@ -106,6 +145,11 @@ public class WeatherAppController {
         }
     }
 
+    /**
+     * Updates the current weather display with the fetched data.
+     *
+     * @param location the location for which to display weather data
+     */
     private void updateCurrentWeatherDisplay(String location) {
         if (currentWeatherData == null)
             return;
@@ -137,6 +181,9 @@ public class WeatherAppController {
         });
     }
 
+    /**
+     * Updates the weekly forecast display with the fetched data.
+     */
     private void updateWeeklyForecastDisplay() {
         if (forecastData == null)
             return;
@@ -171,12 +218,22 @@ public class WeatherAppController {
         }
     }
 
+    /**
+     * Sets the weather image based on the icon code from the API.
+     *
+     * @param iconCode the icon code for the weather condition
+     */
     private void setWeatherImage(String iconCode) {
         String imageUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
         Image image = new Image(imageUrl);
         currentWeatherImageView.setImage(image);
     }
 
+    /**
+     * Shows an error message in an alert dialog.
+     *
+     * @param message the error message to display
+     */
     private void showError(String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -187,6 +244,11 @@ public class WeatherAppController {
         });
     }
 
+    /**
+     * Updates the search history with the specified location.
+     *
+     * @param location the location to add to the search history
+     */
     private void updateHistory(String location) {
         String historyEntry = location + " at "
                 + LocalDateTime.now(locationZoneId).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -197,6 +259,9 @@ public class WeatherAppController {
         historyListView.setItems(searchHistory);
     }
 
+    /**
+     * Updates the background color based on the time of day.
+     */
     private void updateBackground() {
         int hour = LocalDateTime.now(locationZoneId).getHour();
         Platform.runLater(() -> {
@@ -208,6 +273,9 @@ public class WeatherAppController {
         });
     }
 
+    /**
+     * Initializes the controller. Sets up event handlers and initial state.
+     */
     @FXML
     private void initialize() {
         tempUnitToggle.setOnAction(e -> {
