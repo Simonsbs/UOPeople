@@ -5,6 +5,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +32,9 @@ public class WeatherAppController {
 
         try {
             String apiKey = "9a6ae9b001d294e592710366fa041c78";
-            String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid="
+            String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
+            String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + encodedLocation
+                    + "&units=metric&appid="
                     + apiKey;
             URL url = new URI(urlString).toURL();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
