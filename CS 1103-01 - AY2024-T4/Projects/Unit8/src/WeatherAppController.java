@@ -1,18 +1,17 @@
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -27,6 +26,7 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class WeatherAppController {
+
     @FXML
     private TextField locationSelection;
     @FXML
@@ -53,6 +53,8 @@ public class WeatherAppController {
     private JSONObject currentWeatherData;
     private JSONArray forecastData;
 
+    private static final String API_KEY = "9a6ae9b001d294e592710366fa041c78";
+
     @FXML
     private void handleGetWeather() {
         String location = locationSelection.getText();
@@ -60,22 +62,17 @@ public class WeatherAppController {
             showError("Location input cannot be empty.");
             return;
         }
-
         fetchWeatherData(location);
     }
 
     private void fetchWeatherData(String location) {
         try {
-            String apiKey = "9a6ae9b001d294e592710366fa041c78";
-            String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
             String units = isCelsius ? "metric" : "imperial";
-            String currentWeatherUrlString = "http://api.openweathermap.org/data/2.5/weather?q=" + encodedLocation
-                    + "&units=" + units + "&appid=" + apiKey;
-            String forecastUrlString = "http://api.openweathermap.org/data/2.5/forecast?q=" + encodedLocation
-                    + "&units=" + units + "&appid=" + apiKey;
+            String currentWeatherUrl = buildWeatherUrl(location, units, "weather");
+            String forecastUrl = buildWeatherUrl(location, units, "forecast");
 
-            fetchCurrentWeather(currentWeatherUrlString, location);
-            fetchWeeklyForecast(forecastUrlString);
+            fetchCurrentWeather(currentWeatherUrl, location);
+            fetchWeeklyForecast(forecastUrl);
 
             updateHistory(location);
             updateBackground();
@@ -84,46 +81,28 @@ public class WeatherAppController {
         }
     }
 
+    private String buildWeatherUrl(String location, String units, String endpoint) throws IOException {
+        String encodedLocation = URLEncoder.encode(location, StandardCharsets.UTF_8.toString());
+        return String.format("http://api.openweathermap.org/data/2.5/%s?q=%s&units=%s&appid=%s", endpoint,
+                encodedLocation, units, API_KEY);
+    }
+
     private void fetchCurrentWeather(String urlString, String location) throws IOException, URISyntaxException {
         URL url = new URI(urlString).toURL();
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-
-        int responseCode = conn.getResponseCode();
-        if (responseCode == 200) {
-            String inline = "";
-            Scanner scanner = new Scanner(url.openStream());
-            while (scanner.hasNext()) {
-                inline += scanner.nextLine();
-            }
-            scanner.close();
-
+        try (Scanner scanner = new Scanner(url.openStream())) {
+            String inline = scanner.useDelimiter("\\A").next();
             currentWeatherData = new JSONObject(inline);
             updateCurrentWeatherDisplay(location);
-        } else {
-            showError("Error fetching current weather data. Response code: " + responseCode);
         }
     }
 
     private void fetchWeeklyForecast(String urlString) throws IOException, URISyntaxException {
         URL url = new URI(urlString).toURL();
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-
-        int responseCode = conn.getResponseCode();
-        if (responseCode == 200) {
-            String inline = "";
-            Scanner scanner = new Scanner(url.openStream());
-            while (scanner.hasNext()) {
-                inline += scanner.nextLine();
-            }
-            scanner.close();
-
+        try (Scanner scanner = new Scanner(url.openStream())) {
+            String inline = scanner.useDelimiter("\\A").next();
             JSONObject data = new JSONObject(inline);
             forecastData = data.getJSONArray("list");
             updateWeeklyForecastDisplay();
-        } else {
-            showError("Error fetching weekly forecast data. Response code: " + responseCode);
         }
     }
 
@@ -148,12 +127,14 @@ public class WeatherAppController {
         String unit = isCelsius ? "°C" : "°F";
         String speedUnit = isMetersPerSecond ? "m/s" : "mph";
 
-        weatherInfoLabel.setText(String.format(
-                "Weather in %s:\nLocal Time: %s\nTemperature: %.2f%s\nHumidity: %d%%\nWind Speed: %.2f %s\nConditions: %s",
-                location, localDateTime.format(DateTimeFormatter.ofPattern("HH:mm")), temperature, unit, humidity,
-                windSpeed, speedUnit, weatherDescription));
+        Platform.runLater(() -> {
+            weatherInfoLabel.setText(String.format(
+                    "Weather in %s:\nLocal Time: %s\nTemperature: %.2f%s\nHumidity: %d%%\nWind Speed: %.2f %s\nConditions: %s",
+                    location, localDateTime.format(DateTimeFormatter.ofPattern("HH:mm")), temperature, unit, humidity,
+                    windSpeed, speedUnit, weatherDescription));
 
-        setWeatherImage(iconCode);
+            setWeatherImage(iconCode);
+        });
     }
 
     private void updateWeeklyForecastDisplay() {
@@ -197,11 +178,13 @@ public class WeatherAppController {
     }
 
     private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 
     private void updateHistory(String location) {
@@ -216,29 +199,31 @@ public class WeatherAppController {
 
     private void updateBackground() {
         int hour = LocalDateTime.now(locationZoneId).getHour();
-        if (hour >= 6 && hour < 18) {
-            locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightyellow;");
-        } else {
-            locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightblue;");
-        }
+        Platform.runLater(() -> {
+            if (hour >= 6 && hour < 18) {
+                locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightyellow;");
+            } else {
+                locationSelection.getScene().getRoot().setStyle("-fx-background-color: lightblue;");
+            }
+        });
     }
 
     @FXML
     private void initialize() {
-        windUnitToggle.setOnAction(e -> {
-            isCelsius = !windUnitToggle.isSelected();
-            windUnitToggle.setText(isCelsius ? "°C" : "°F");
+        tempUnitToggle.setOnAction(e -> {
+            isCelsius = !tempUnitToggle.isSelected();
+            tempUnitToggle.setText(isCelsius ? "°C" : "°F");
             updateCurrentWeatherDisplay(locationSelection.getText());
             updateWeeklyForecastDisplay();
         });
-        windUnitToggle.setText(isCelsius ? "°C" : "°F");
+        tempUnitToggle.setText(isCelsius ? "°C" : "°F");
 
-        tempUnitToggle.setOnAction(e -> {
-            isMetersPerSecond = !tempUnitToggle.isSelected();
-            tempUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
+        windUnitToggle.setOnAction(e -> {
+            isMetersPerSecond = !windUnitToggle.isSelected();
+            windUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
             updateCurrentWeatherDisplay(locationSelection.getText());
         });
-        tempUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
+        windUnitToggle.setText(isMetersPerSecond ? "m/s" : "mph");
 
         historyListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
