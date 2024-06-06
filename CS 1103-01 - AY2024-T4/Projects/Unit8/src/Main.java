@@ -9,7 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/WeatherApp.fxml"));
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 960, 590);
             primaryStage.setTitle("Weather Information App");
             primaryStage.setScene(scene);
             primaryStage.show();
